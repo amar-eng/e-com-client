@@ -1,0 +1,19 @@
+@mixin light-font {
+  font-family: 'Manrope-light';
+}
+
+@mixin normal-font {
+  font-family: 'Manrope-normal';
+}
+
+@mixin bold-font {
+  font-family: 'Manrope-bold';
+}
+
+@mixin thin-font {
+  font-family: 'Manrope-thin';
+}
+
+@mixin logo-font {
+  font-family: 'Quicksand';
+}

@@ -1,0 +1,37 @@
+.navbar-container {
+  position: relative;
+}
+.custom-navbar {
+  background-color: $black;
+  color: $white;
+  padding: 1rem;
+}
+.navbar-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $off-white;
+  margin: 0 1.5rem;
+}
+
+.responsive-navbar {
+  background-color: $black;
+  &__links {
+    @include fontSizeAndColor($tiny-heading, $white);
+    @include thin-font;
+    padding: 1rem 0;
+  }
+}
+
+.navbar-logo {
+  @include logo-font;
+  @include fontSizeAndColor($large-heading, white);
+  cursor: default;
+}
+.navbar-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
