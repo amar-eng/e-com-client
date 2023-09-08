@@ -1,0 +1,8 @@
+.featured {
+  @include header-text;
+
+  &__row {
+    border: 1px solid green;
+    margin: 1rem;
+  }
+}

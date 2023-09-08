@@ -1,9 +1,9 @@
 @mixin light-font {
-  font-family: 'Manrope-light';
+  font-family: 'Raleway-Light';
 }
 
 @mixin normal-font {
-  font-family: 'Manrope-normal';
+  font-family: 'Quicksand';
 }
 
 @mixin bold-font {
@@ -13,7 +13,20 @@
 @mixin thin-font {
   font-family: 'Manrope-thin';
 }
+@mixin italiana {
+  font-family: 'Italiana';
+}
+@mixin antic {
+  font-family: 'AnticDidone';
+}
 
 @mixin logo-font {
-  font-family: 'Quicksand';
+  // font-family: 'Quicksand';
+  font-family: 'Italiana';
+  // font-family: 'AnticDidone';
+  letter-spacing: 2px;
+}
+
+@mixin alternate-font {
+  font-family: 'TitilliumWeb';
 }

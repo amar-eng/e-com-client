@@ -1,0 +1,20 @@
+@mixin fontSizeAndColor($font-size, $color) {
+  font-size: $font-size;
+  color: $color;
+}
+
+@mixin flex($align-items, $justify-content, $flex-direction) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $flex-direction;
+}
+
+@mixin header-text {
+  @include antic;
+  font-size: $medium-heading;
+  color: $black;
+  margin: 1rem;
+  margin-top: 1.5rem;
+  text-align: center;
+}

@@ -1,0 +1,12 @@
+.button-container {
+  background-color: transparent;
+  @include italiana;
+  @include fontSizeAndColor($small-heading, $black);
+  padding: 0.5rem 1rem;
+  border: 1px solid $gold;
+  &:hover {
+    border: 1px solid $gold;
+    background-color: $gold;
+    transition: 3s smooth;
+  }
+}

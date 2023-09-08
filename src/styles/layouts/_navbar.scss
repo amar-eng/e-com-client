@@ -2,8 +2,8 @@
   position: relative;
 }
 .custom-navbar {
-  background-color: $black;
-  color: $white;
+  background-color: $white;
+  color: $black;
   padding: 1rem;
 }
 .navbar-underline {
@@ -12,14 +12,13 @@
   left: 0;
   right: 0;
   height: 1px;
-  background-color: $off-white;
+  background-color: $dark-grey;
   margin: 0 1.5rem;
 }
 
 .responsive-navbar {
-  background-color: $black;
   &__links {
-    @include fontSizeAndColor($tiny-heading, $white);
+    @include fontSizeAndColor($tiny-heading, $black);
     @include thin-font;
     padding: 1rem 0;
   }
@@ -27,7 +26,7 @@
 
 .navbar-logo {
   @include logo-font;
-  @include fontSizeAndColor($large-heading, white);
+  @include fontSizeAndColor($large-heading, $gold);
   cursor: default;
 }
 .navbar-row {

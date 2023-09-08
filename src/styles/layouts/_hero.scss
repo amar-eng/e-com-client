@@ -1,0 +1,30 @@
+.hero {
+  background-image: url('../../assets/images/heroImage.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  background-color: $white;
+  color: $black;
+  @include flex(center, space-between, column);
+  height: 60vh;
+
+  &__header {
+    @include antic;
+    @include fontSizeAndColor($large-heading, $black);
+    text-transform: capitalize;
+    &-span {
+      @include fontSizeAndColor($large-heading, $gold);
+    }
+    &-paragraph {
+      @include fontSizeAndColor($small-heading, $black);
+      text-transform: none;
+      @include antic;
+    }
+  }
+
+  &__buttons {
+    @include flex(center, space-between, row);
+    width: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+.card-container {
+  border: 1px solid black;
+  margin: 0.5rem 0.25rem;
+  background-color: $grey;
+  width: 160px;
+  height: 360px;
+  &__like {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    &-button {
+      fill: $red !important;
+      cursor: pointer;
+    }
+  }
+}
+
+.card-content {
+  width: 100%;
+  border: 1px solid blue;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__img {
+    object-fit: contain;
+    object-position: center;
+  }
+}
