@@ -27,7 +27,7 @@
 .navbar-logo {
   @include logo-font;
   @include fontSizeAndColor($large-heading, $gold);
-  cursor: default;
+  cursor: pointer;
 }
 .navbar-row {
   width: 100%;
