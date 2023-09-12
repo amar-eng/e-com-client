@@ -1,16 +1,20 @@
 import { Row, Col } from 'react-bootstrap';
 import { useGetProductsQuery } from '../services/slices/productsApiSlice';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Loader } from '../components/Loader';
+import { Message } from '../components/Message';
 
 export const ExploreScents = () => {
-  const { data: products, isLoading, isError } = useGetProductsQuery();
+  const { data: products, isLoading, isError, error } = useGetProductsQuery();
 
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : isError ? (
-        <p>Error loading data</p>
+        <Message>
+          {error?.data?.message || 'Error loading product details'}
+        </Message>
       ) : (
         <>
           <h1>Explore</h1>

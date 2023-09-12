@@ -1,5 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import { Buttons } from '../components/Buttons';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export const Hero = () => {
   return (
@@ -13,9 +14,12 @@ export const Hero = () => {
       </div>
 
       <Row className="hero__buttons">
-        <Col>
-          <Buttons text="Explore Scents" />
-        </Col>
+        <LinkContainer to="/explore-scents">
+          <Col>
+            <Buttons text="Explore Scents" />
+          </Col>
+        </LinkContainer>
+
         <Col>
           <Buttons text="Subscribe Now" />
         </Col>
