@@ -17,24 +17,30 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const item = action.payload;
 
-      // Check if the item already exists in the cart
       const existItemIndex = state.cartItems.findIndex(
         (i) => i.product._id === item.product._id
       );
 
       if (existItemIndex !== -1) {
-        // If the item exists, update its quantity
         state.cartItems[existItemIndex].qty = item.qty;
       } else {
-        // If the item doesn't exist, add it to the cart
         state.cartItems.push(item);
       }
 
       return updateCart(state);
     },
+
+    removeFromCart: (state, action) => {
+      const productId = action.payload;
+
+      state.cartItems = state.cartItems.filter(
+        (item) => item.product._id !== productId
+      );
+      return updateCart(state);
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

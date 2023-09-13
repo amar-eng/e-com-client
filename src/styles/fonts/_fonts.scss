@@ -2,6 +2,10 @@
   font-family: 'Manrope-light';
   src: url(../../assets/fonts/Manrope/static/Manrope-Light.ttf);
 }
+@font-face {
+  font-family: 'Manrope-extralight';
+  src: url(../../assets/fonts/Manrope/static/Manrope-ExtraLight.ttf);
+}
 
 @font-face {
   font-family: 'Manrope-normal';
@@ -41,4 +45,8 @@
 @font-face {
   src: url(../../assets/fonts/Antic_Didone/AnticDidone-Regular.ttf);
   font-family: 'AnticDidone';
+}
+@font-face {
+  src: url(../../assets/fonts/Cormorant_Garamond/CormorantGaramond-Light.ttf);
+  font-family: 'Carmorant';
 }

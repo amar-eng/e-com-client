@@ -13,17 +13,23 @@ import { Message } from '../components/Message';
 import { useDispatch } from 'react-redux';
 import { useCartItems } from '../hooks/useCartItems';
 import { generateQuantitySelectOptions } from '../utils/common';
-import { addToCart } from '../services/slices/cartSlice';
-import { useState } from 'react';
+import { addToCart, removeFromCart } from '../services/slices/cartSlice';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useCartItems();
-  // const [qty, setQty] = useState(1);
 
   const addToCartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));
+  };
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    navigate('/login?redirect=/shipping');
   };
 
   return (
@@ -53,7 +59,7 @@ export const Cart = () => {
                         />
                       </Col>
                       <Col md={3}>
-                        <Link to={`/product/${item.product._id}`}>
+                        <Link to={`/explore-scents/${item.product._id}`}>
                           {item.product.name}
                         </Link>
                       </Col>
@@ -70,12 +76,15 @@ export const Cart = () => {
                         </Form.Control>
                       </Col>
                       <Col md={2}>
-                        <DeleteOutlinedIcon
-                          onClick={() => {
-                            // Handle item removal from cart here
-                          }}
-                          style={{ color: '#e02e2edb' }}
-                        />
+                        <Button
+                          type="button"
+                          variant="light"
+                          onClick={() =>
+                            removeFromCartHandler(item.product._id)
+                          }
+                        >
+                          <DeleteOutlinedIcon />
+                        </Button>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -105,6 +114,7 @@ export const Cart = () => {
                 type="button"
                 className="btn-block"
                 disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
                 variant="warning"
               >
                 Proceed to Checkout

@@ -16,6 +16,7 @@ import { PricingPlans } from './pages/PricingPlans';
 import { Cart } from './pages/Cart';
 import store from './store';
 import { ProductDetails } from './pages/ProductDetails';
+import { LoginPage } from './pages/LoginPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Home />} />
       <Route index={true} path="/explore-scents" element={<ExploreScents />} />
       <Route index={true} path="/pricing-plans" element={<PricingPlans />} />
+      <Route index={true} path="/login" element={<LoginPage />} />
       <Route
         index={true}
         path="/explore-scents/:id"

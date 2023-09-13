@@ -1,11 +1,10 @@
-import { Navbar, Col, Row, Badge } from 'react-bootstrap';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import { Navbar, Col, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useCartItems } from '../hooks/useCartItems';
+import { user, shoppingBag } from '../utils/lists';
 
 export const AppNavbar = () => {
   const cartItems = useCartItems();
-
   return (
     <div className="navbar-container">
       <Navbar className="custom-navbar">
@@ -15,13 +14,31 @@ export const AppNavbar = () => {
               <div className="navbar-logo">aroma</div>
             </Col>
           </LinkContainer>
+          <LinkContainer to="/login">
+            <Col xs="auto" className="navbar-item">
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {/* User icon */}
+                <img
+                  src={user}
+                  style={{
+                    width: '25px',
+                    margin: '0 0.5rem',
+                  }}
+                />
+              </div>
+            </Col>
+          </LinkContainer>
 
           <LinkContainer to="/cart">
             <Col xs="auto" className="navbar-item">
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <ShoppingBagOutlinedIcon
-                  style={{ cursor: 'pointer', fill: '#d9ac68' }}
+                <img
+                  src={shoppingBag}
+                  style={{
+                    width: '25px',
+                  }}
                 />
+
                 {cartItems.length > 0 && (
                   <div className="cart-item-count">
                     {cartItems.reduce((a, c) => a + c.qty, 0)}
