@@ -1,10 +1,32 @@
-import { Navbar, Col, Row } from 'react-bootstrap';
+import { Navbar, Col, Row, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useCartItems } from '../hooks/useCartItems';
 import { user, shoppingBag } from '../utils/lists';
+import { useUserInfo } from '../hooks/useUserInfo';
+import { useLogoutMutation } from '../services/slices/usersApiSlice';
+import { logout } from '../services/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export const AppNavbar = () => {
   const cartItems = useCartItems();
+  const userInfo = useUserInfo();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      toast.success('Logged out successfully');
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.data?.message || error.data);
+    }
+  };
+
   return (
     <div className="navbar-container">
       <Navbar className="custom-navbar">
@@ -25,6 +47,16 @@ export const AppNavbar = () => {
                     margin: '0 0.5rem',
                   }}
                 />
+                {userInfo && (
+                  <NavDropdown title={userInfo.name} id="username">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                )}
               </div>
             </Col>
           </LinkContainer>

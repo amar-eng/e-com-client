@@ -4,23 +4,25 @@ import { Form, Col, Row, Button } from 'react-bootstrap';
 import { FormContainer } from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../components/Loader';
-import { useLoginMutation } from '../services/slices/usersApiSlice';
+import { useRegisterMutation } from '../services/slices/usersApiSlice';
 import { setCredentials } from '../services/slices/authSlice';
 import { toast } from 'react-toastify';
 
-export const LoginPage = () => {
+export const Register = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
-  const sp = new URLSearchParams(search);
-  const redirect = sp.get('redirect') || '/';
+  const searchParams = new URLSearchParams(search);
+  const redirect = searchParams.get('redirect') || '/';
 
   useEffect(() => {
     if (userInfo) {
@@ -31,19 +33,32 @@ export const LoginPage = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate(redirect);
-      toast.success('Logged in successfully, please wait');
-    } catch (error) {
-      toast.error(error?.data?.message || error.data);
+    if (password !== confirmPassword) {
+      toast.error('Passwords dont match');
+      return;
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate(redirect);
+        toast.success('Registered successfully, please wait');
+      } catch (error) {
+        toast.error(error?.data?.message || error.data);
+      }
     }
   };
   return (
     <FormContainer>
-      <h1>Login</h1>
+      <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
+        <Form.Group controlId="name" className="my-3">
+          <Form.Control
+            type="text"
+            placeholder="Enter Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Form.Group controlId="email" className="my-3">
           <Form.Control
             type="email"
@@ -60,21 +75,29 @@ export const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Form.Group controlId="confirmPassword" className="my-3">
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Button
           type="submit"
           variant="warning"
           className="mt-2"
           disabled={isLoading}
         >
-          Sign In
+          Register{' '}
         </Button>
         {isLoading && <Loader />}
       </Form>
       <Row>
         <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-            Register
+          Already have an account?{' '}
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+            Login
           </Link>
         </Col>
       </Row>

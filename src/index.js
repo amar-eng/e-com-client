@@ -17,20 +17,24 @@ import { Cart } from './pages/Cart';
 import store from './store';
 import { ProductDetails } from './pages/ProductDetails';
 import { LoginPage } from './pages/LoginPage';
+import { Register } from './pages/Register';
+import { Shipping } from './pages/Shipping';
+import { PrivateRoute } from './layouts/PrivateRoute';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Home />} />
-      <Route index={true} path="/explore-scents" element={<ExploreScents />} />
-      <Route index={true} path="/pricing-plans" element={<PricingPlans />} />
-      <Route index={true} path="/login" element={<LoginPage />} />
-      <Route
-        index={true}
-        path="/explore-scents/:id"
-        element={<ProductDetails />}
-      />
+      <Route path="/explore-scents" element={<ExploreScents />} />
+      <Route path="/pricing-plans" element={<PricingPlans />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/explore-scents/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
+
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/shipping" element={<Shipping />} />
+      </Route>
     </Route>
   )
 );
