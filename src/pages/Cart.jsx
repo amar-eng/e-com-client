@@ -11,7 +11,7 @@ import {
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Message } from '../components/Message';
 import { useDispatch } from 'react-redux';
-import { useCartItems } from '../hooks/useCartItems';
+import { useCartItems } from '../hooks/useCartInfo';
 import { generateQuantitySelectOptions } from '../utils/common';
 import { addToCart, removeFromCart } from '../services/slices/cartSlice';
 

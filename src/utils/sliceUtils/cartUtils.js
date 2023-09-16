@@ -1,4 +1,4 @@
-const addDecimals = (num) => {
+export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);
 };
 
@@ -10,7 +10,8 @@ export const updateCart = (state) => {
     )
   );
 
-  state.shippingPrice = state.itemsPrice > 50 ? 0 : 5;
+  state.shippingPrice =
+    state.itemsPrice > 100 ? 0 : addDecimals(0.15 * state.itemsPrice);
 
   state.taxPrice = addDecimals(0.13 * state.itemsPrice);
 

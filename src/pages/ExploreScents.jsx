@@ -20,8 +20,11 @@ export const ExploreScents = () => {
           <h1>Explore</h1>
           <Row>
             {products.map((product) => (
-              <LinkContainer to={`/explore-scents/${product.id}`}>
-                <Col key={product.id}>{product.name}</Col>
+              <LinkContainer
+                to={`/explore-scents/${product.id}`}
+                key={product.id}
+              >
+                <Col>{product.name}</Col>
               </LinkContainer>
             ))}
           </Row>

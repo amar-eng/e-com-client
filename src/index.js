@@ -20,6 +20,9 @@ import { LoginPage } from './pages/LoginPage';
 import { Register } from './pages/Register';
 import { Shipping } from './pages/Shipping';
 import { PrivateRoute } from './layouts/PrivateRoute';
+import { Payment } from './pages/Payment';
+import { PlaceOrder } from './pages/PlaceOrder';
+import { OrderDetails } from './pages/OrderDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +37,9 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/shipping" element={<Shipping />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path="order/:id" element={<OrderDetails />} />
       </Route>
     </Route>
   )

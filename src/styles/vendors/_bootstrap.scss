@@ -3,3 +3,10 @@
 Link {
   color: transparent;
 }
+
+.list-group {
+  --bs-list-group-bg: $white;
+}
+.list-group-item {
+  padding: 0.5rem 0 !important;
+}

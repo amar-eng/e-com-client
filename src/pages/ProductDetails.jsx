@@ -53,7 +53,7 @@ export const ProductDetails = () => {
     <>
       <Col>{scent.name}</Col>
       <Col>
-        {scent.concentration} - Best for {scent.category.occasion}
+        {scent.concentration} - Best for {scent.occasion}
       </Col>
       <Row>
         <Col xs={6} sm={6} md={3} lg={3} xl={3}>

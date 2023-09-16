@@ -1,6 +1,6 @@
 import { Navbar, Col, Row, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useCartItems } from '../hooks/useCartItems';
+import { useCartItems } from '../hooks/useCartInfo';
 import { user, shoppingBag } from '../utils/lists';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { useLogoutMutation } from '../services/slices/usersApiSlice';
