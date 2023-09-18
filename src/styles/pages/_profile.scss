@@ -1,0 +1,28 @@
+.profile-row {
+  @include flex(center, center, row);
+  &__col {
+    margin: 1rem 1.5rem;
+    @include border-bottom;
+    text-align: center;
+  }
+
+  &__row {
+    margin-bottom: 1rem;
+  }
+
+  &-bottom {
+    @include flex(flex-start, center, row);
+
+    &__col {
+      margin: 0.5rem 1.5rem;
+      &-right {
+        margin-right: 0;
+      }
+    }
+
+    &__row {
+      @include flex(center, center, row);
+      margin-bottom: 1rem;
+    }
+  }
+}

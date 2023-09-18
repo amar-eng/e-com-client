@@ -7,6 +7,61 @@ Link {
 .list-group {
   --bs-list-group-bg: $white;
 }
+
 .list-group-item {
   padding: 0.5rem 0 !important;
+}
+
+// .container > .row,
+// .container-fluid > .row,
+// .row {
+//   margin: 1rem !important;
+// }
+
+// .col,
+// .col-1,
+// .col-2,
+// .col-3,
+// .col-4,
+// .col-5,
+// .col-6,
+// .col-7,
+// .col-8,
+// .col-9,
+// .col-10,
+// .col-11,
+// .col-12,
+// .col-sm,
+// .col-md,
+// .col-lg,
+// .col-xl,
+// .col-xxl {
+//   padding-left: calc(0.75rem - 0.75rem) !important;
+//   padding-right: calc(0.75rem - 0.75rem) !important;
+//   margin: 0.75rem !important;
+// }
+
+.form-control {
+  border-radius: 0 !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.btn {
+  background-color: $black !important;
+  color: $white !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 0.75rem !important;
+  border-color: $black !important;
+}
+
+.btn-secondary {
+  background-color: $white !important;
+  color: $black !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 0.75rem !important;
+  border-color: $black !important;
+}
+
+.container {
+  max-width: 100vw;
 }

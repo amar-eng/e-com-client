@@ -36,6 +36,7 @@ export const AppNavbar = () => {
               <div className="navbar-logo">aroma</div>
             </Col>
           </LinkContainer>
+
           <LinkContainer to="/login">
             <Col xs="auto" className="navbar-item">
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -55,6 +56,20 @@ export const AppNavbar = () => {
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>
+                  </NavDropdown>
+                )}
+
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown title="Admin" id="adminMenu">
+                    <LinkContainer to="/admin/productlist">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/orderlist">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/userlist">
+                      <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
                   </NavDropdown>
                 )}
               </div>

@@ -9,17 +9,15 @@ export const generateQuantitySelectOptions = (countInStock) => {
 };
 
 export const generateFormattedDate = (dateString) => {
-  const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-  };
-  const formattedDate = new Date(dateString).toLocaleDateString(
-    'en-US',
-    options
-  );
-  return formattedDate;
+  if (!dateString) return 'Invalid Date';
+
+  const date = new Date(dateString);
+
+  if (isNaN(date.getTime())) return 'Invalid Date'; // this checks if the date creation was successful
+
+  return date.toISOString().split('T')[0];
+};
+
+export const maskedId = (id) => {
+  return `***${id.slice(-4)}`;
 };

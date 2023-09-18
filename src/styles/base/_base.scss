@@ -15,5 +15,9 @@
 
   font-size: $small-heading;
   @include thin-font;
-  background-color: #fcf9ee;
+  background-color: $white;
+}
+
+html {
+  background-color: $white;
 }
