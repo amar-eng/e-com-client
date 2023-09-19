@@ -47,8 +47,6 @@ export const ProductDetails = () => {
     );
     navigate('/cart');
   };
-
-  console.log(typeof scent.price);
   return (
     <>
       <Col>{scent.name}</Col>

@@ -22,7 +22,6 @@ export const AppNavbar = () => {
       dispatch(logout());
       toast.success('Logged out successfully');
     } catch (error) {
-      console.log(error);
       toast.error(error?.data?.message || error.data);
     }
   };

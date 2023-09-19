@@ -10,6 +10,7 @@ import { useGetMyOrdersQuery } from '../../services/slices/ordersApiSlice';
 import { setCredentials } from '../../services/slices/authSlice';
 import { generateFormattedDate, maskedId } from '../../utils/common';
 import { x, check } from '../../utils/lists';
+import { ProfileHeader } from '../../components/ProfileHeader';
 
 export const MyOrders = () => {
   const [name, setName] = useState('');
@@ -64,131 +65,86 @@ export const MyOrders = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-space-between">
-      <Col md={3}>
-        <h4>User Profile</h4>
-        <Form onSubmit={submitHandler}>
-          <Form.Group className="my-2" controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="email">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type="submit" variant="warning">
-            Update Profile
-          </Button>
+    <Col md={11} className="orders-col">
+      <ProfileHeader headerText="My Orders" />
+      {loadingOrders ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">Error fetching orders</Message>
+      ) : userOrders.length === 0 ? (
+        <Message>Your order history is empty.</Message>
+      ) : (
+        <Table striped hover className="table-sm">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Created Date</th>
+              <th>Total</th>
+              <th>Paid</th>
+              <th>Delivered</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userOrders.map((order) => (
+              <tr key={order._id}>
+                <td data-label="Order ID">{maskedId(order._id)}</td>
+                <td data-label="Created Date">
+                  {generateFormattedDate(order.createdAt)}
+                </td>
+                <td data-label="Total">${order.totalPrice.toFixed(2)}</td>
+                <td data-label="Paid">
+                  {order.isPaid ? (
+                    <>
+                      <img src={check} alt="paid" style={{ width: '20px' }} />
+                      {generateFormattedDate(order.paidAt)}
+                    </>
+                  ) : (
+                    <>
+                      <img src={x} alt="not paid" style={{ width: '20px' }} />
+                    </>
+                  )}
+                </td>
 
-          {loadingUpdateProfile && <Loader />}
-        </Form>
-      </Col>
-      <Col md={9}>
-        <h4>My Orders</h4>
-        {loadingOrders ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">Error fetching orders</Message>
-        ) : userOrders.length === 0 ? (
-          <Message>Your order history is empty.</Message>
-        ) : (
-          <Table striped hover responsive className="table-sm">
-            <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>Created Date</th>
-                <th>Total</th>
-                <th>Paid</th>
-                <th>Delivered</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {userOrders.map((order) => (
-                <tr key={order._id}>
-                  <td>{maskedId(order._id)}</td>
-                  <td>{generateFormattedDate(order.createdAt)}</td>
-                  <td>${order.totalPrice.toFixed(2)}</td>
-                  <td>
-                    {order.isPaid ? (
-                      <>
-                        <img
-                          src={check}
-                          alt="paid"
-                          style={{
-                            width: '30px',
-                          }}
-                        />
-                        {generateFormattedDate(order.paidAt)}
-                      </>
-                    ) : (
-                      'Not Paid'
-                    )}
-                  </td>
-
-                  <td>
-                    {order.isDelivered ? (
-                      <>
-                        <img
-                          src={check}
-                          alt="delivered"
-                          style={{
-                            width: '30px',
-                          }}
-                        />
-                        {generateFormattedDate(order.deliveredAt)}
-                      </>
-                    ) : (
+                <td data-label="Delivered">
+                  {order.isDelivered ? (
+                    <>
                       <img
-                        src={x}
-                        alt="not-delivered"
+                        src={check}
+                        alt="delivered"
                         style={{
-                          width: '30px',
+                          width: '20px',
                         }}
                       />
-                    )}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button variant="light" className="btn-sm">
-                        See Order Details
-                      </Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </Col>
-    </Row>
+                      {generateFormattedDate(order.deliveredAt)}
+                    </>
+                  ) : (
+                    <img
+                      src={x}
+                      alt="not-delivered"
+                      style={{
+                        width: '20px',
+                      }}
+                    />
+                  )}
+                </td>
+
+                <Col xs={12}>
+                  <LinkContainer to={`/order/${order._id}`}>
+                    <Button
+                      variant="primary"
+                      className="btn-sm fullWidthButton"
+                      xs={12}
+                    >
+                      See Order Details
+                    </Button>
+                  </LinkContainer>
+                </Col>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </Col>
   );
 };

@@ -4,6 +4,7 @@ import {
   useGetOrderDetailsQuery,
   useGetPayPalClientIdQuery,
   usePayOrderMutation,
+  useDeliverOrderMutation,
 } from '../services/slices/ordersApiSlice';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
@@ -22,9 +23,11 @@ export const OrderDetails = () => {
     isLoading,
     isError,
   } = useGetOrderDetailsQuery(orderId);
-  console.log(order);
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
@@ -93,6 +96,26 @@ export const OrderDetails = () => {
         return orderID;
       });
   }
+
+  const deliverHandler = async () => {
+    if (!orderId) {
+      toast.error('Order ID is missing. Cannot mark order as delivered.');
+      return;
+    }
+
+    try {
+      const response = await deliverOrder(orderId);
+
+      if (response && response.error) {
+        throw new Error(response.error.message);
+      }
+      refetch();
+      toast.success('Order marked as delivered');
+    } catch (error) {
+      console.error('Error: ', error);
+      toast.error(error?.data?.message || 'Failed to mark order as delivered');
+    }
+  };
 
   return isLoading ? (
     <Loader />
@@ -222,6 +245,23 @@ export const OrderDetails = () => {
                   )}
                 </ListGroup.Item>
               )}
+
+              {loadingDeliver && <Loader />}
+
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

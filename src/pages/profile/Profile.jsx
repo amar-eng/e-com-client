@@ -10,6 +10,7 @@ import { useGetMyOrdersQuery } from '../../services/slices/ordersApiSlice';
 import { setCredentials } from '../../services/slices/authSlice';
 import { generateFormattedDate, maskedId } from '../../utils/common';
 import { x, check } from '../../utils/lists';
+import { ProfileHeader } from '../../components/ProfileHeader';
 
 export const Profile = () => {
   const [name, setName] = useState('');
@@ -60,8 +61,8 @@ export const Profile = () => {
   return (
     <Row className="d-flex justify-content-center align-items-center">
       <Col md={8}>
-        <h4>Account Profile</h4>
-        <p>
+        <ProfileHeader headerText="My Profile" />
+        <p style={{ textAlign: 'center' }}>
           Please review your information below and add any missing information.
         </p>
         <Form onSubmit={submitHandler}>

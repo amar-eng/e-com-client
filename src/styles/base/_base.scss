@@ -16,6 +16,10 @@
   font-size: $small-heading;
   @include thin-font;
   background-color: $white;
+
+  table img {
+    width: 20px;
+  }
 }
 
 html {
