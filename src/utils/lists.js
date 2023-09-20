@@ -9,5 +9,6 @@ import x from '../assets/icons/x.svg';
 import edit from '../assets/icons/edit-white-24px.svg';
 import editBlack from '../assets/icons/edit-24px.svg';
 import del from '../assets/icons/delete_outline-24px.svg';
+import add from '../assets/icons/add.svg';
 
-export { heroImage, user, shoppingBag, check, x, edit, del, editBlack };
+export { heroImage, user, shoppingBag, check, x, edit, del, editBlack, add };

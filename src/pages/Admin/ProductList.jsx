@@ -2,25 +2,47 @@ import { Button, Table, Row, Col } from 'react-bootstrap';
 import { Message } from '../../components/Message';
 import { Loader } from '../../components/Loader';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useGetProductsQuery } from '../../services/slices/productsApiSlice';
-import { x, check, edit, del, editBlack } from '../../utils/lists';
-import { generateFormattedDate } from '../../utils/common';
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from '../../services/slices/productsApiSlice';
+import { del, editBlack, add } from '../../utils/lists';
+import { ProfileHeader } from '../../components/ProfileHeader';
+import { toast } from 'react-toastify';
 
 export const ProductList = () => {
-  const { data, isLoading, error } = useGetProductsQuery();
-  console.log(data);
+  const { data, isLoading, error, refetch } = useGetProductsQuery();
+
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation();
 
   const deleteHandler = () => {
     console.log('deleted');
   };
 
+  const createProductHandler = async () => {
+    if (window.confirm('Are you sure you want to create a new product?')) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error.error);
+      }
+    }
+  };
+
   return (
     <>
-      <Row>
-        <Col>Products</Col>
+      <Row className="d-flex align-items-center">
+        <ProfileHeader headerText="Products" />
         <Col className="text-end">
-          <Button className="btn-sm m-3">
-            Create a Product <img src={edit} alt="edit-button-icon" />
+          <Button
+            className="btn-sm m-3"
+            variant="secondary"
+            onClick={createProductHandler}
+          >
+            Create a Product{' '}
+            <img src={add} alt="edit-button-icon" style={{ width: '20px' }} />
           </Button>
         </Col>
       </Row>
