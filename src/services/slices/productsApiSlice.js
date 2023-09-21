@@ -56,6 +56,52 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+
+    uploadSingleImage: builder.mutation({
+      query: (data) => {
+        const token = getTokenFromLocalStorage();
+        console.log(token);
+
+        return {
+          url: `${PRODUCTS_URL}/upload`,
+          method: 'POST',
+          body: data,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+
+    uploadMultipleImages: builder.mutation({
+      query: (data) => {
+        const token = getTokenFromLocalStorage();
+
+        return {
+          url: `${PRODUCTS_URL}/upload-images`,
+          method: 'POST',
+          body: data,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+
+    deleteProduct: builder.mutation({
+      query: (productId) => {
+        const token = getTokenFromLocalStorage();
+
+        return {
+          url: `${PRODUCTS_URL}/${productId}`,
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+      invalidatesTags: ['Product'],
+    }),
   }),
 });
 
@@ -65,4 +111,7 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useGetCategoriesQuery,
+  useUploadSingleImageMutation,
+  useUploadMultipleImagesMutation,
+  useDeleteProductMutation,
 } = productsApiSlice;

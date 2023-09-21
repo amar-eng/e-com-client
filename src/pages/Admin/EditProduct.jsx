@@ -5,6 +5,8 @@ import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
   useGetCategoriesQuery,
+  useUploadSingleImageMutation,
+  useUploadMultipleImagesMutation,
 } from '../../services/slices/productsApiSlice';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Message } from '../../components/Message';
@@ -51,6 +53,12 @@ export const EditProduct = () => {
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
+
+  const [uploadImage, { isLoading: loadingImageUpload }] =
+    useUploadSingleImageMutation();
+
+  const [uploadMultipleImages, { isLoading: loadingMultipleImageUpload }] =
+    useUploadMultipleImagesMutation();
 
   const navigate = useNavigate();
 
@@ -113,6 +121,33 @@ export const EditProduct = () => {
     }
   };
 
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+
+    try {
+      const res = await uploadImage(formData).unwrap();
+      toast.success('Image uploaded');
+      setImage(res.image);
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
+
+  const uploadMultipleFilesHandler = async (e) => {
+    const formData = new FormData();
+    const files = Array.from(e.target.files);
+    files.forEach((file) => formData.append('images', file));
+
+    try {
+      const res = await uploadMultipleImages(formData).unwrap();
+      toast.success('Images uploaded successfully!');
+      setImages(res.images);
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
+
   return (
     <>
       <ProfileHeader headerText="Edit Product" />
@@ -158,7 +193,7 @@ export const EditProduct = () => {
                 onChange={(e) => setRichDescription(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            {/* <Form.Group controlId="image">
+            <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
@@ -166,17 +201,23 @@ export const EditProduct = () => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
-            </Form.Group> */}
-            {/* This is just a placeholder for images array. You may need a different UI for handling array of images */}
-            {/* <Form.Group controlId="images">
+
+              <Form.Control
+                type="file"
+                label="chooseFile"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="images">
               <Form.Label>Images</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter images"
-                value={images}
-                onChange={(e) => setImages(e.target.value)}
+                type="file"
+                multiple
+                onChange={uploadMultipleFilesHandler}
               ></Form.Control>
-            </Form.Group> */}
+            </Form.Group>
+
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
@@ -287,10 +328,10 @@ export const EditProduct = () => {
                 value={concentration}
                 onChange={(e) => setConcentration(e.target.value)}
               >
-                <option value="spring">Eau de Parfum</option>
-                <option value="summer">Eau de Toilette</option>
-                <option value="fall">Eau de Cologne</option>
-                <option value="winter">Parfum</option>
+                <option value="Eau de Parfum">Eau de Parfum</option>
+                <option value="Eau de Toilette">Eau de Toilette</option>
+                <option value="Eau de Cologne">Eau de Cologne</option>
+                <option value="Parfum">Parfum</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="vibe">
@@ -300,10 +341,10 @@ export const EditProduct = () => {
                 value={vibe}
                 onChange={(e) => setVibe(e.target.value)}
               >
-                <option value="spring">Floral</option>
-                <option value="summer">Oriental</option>
-                <option value="fall">Woody</option>
-                <option value="winter">Fresh</option>
+                <option value="Floral">Floral</option>
+                <option value="Oriental">Oriental</option>
+                <option value="Woody">Woody</option>
+                <option value="Fresh">Fresh</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="occasion">
@@ -313,10 +354,10 @@ export const EditProduct = () => {
                 value={occasion}
                 onChange={(e) => setOccasion(e.target.value)}
               >
-                <option value="spring">Floral</option>
-                <option value="summer">Oriental</option>
-                <option value="fall">Woody</option>
-                <option value="winter">Fresh</option>
+                <option value="Night-Out">Night-Out</option>
+                <option value="Everyday-Essentials">Everyday-Essentials</option>
+                <option value="Elegant-Occasions">Elegant-Occasions</option>
+                <option value="Professional-Aura">Professional-Aura</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="topNotes">

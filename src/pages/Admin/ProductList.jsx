@@ -5,10 +5,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 import {
   useGetProductsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from '../../services/slices/productsApiSlice';
 import { del, editBlack, add } from '../../utils/lists';
 import { ProfileHeader } from '../../components/ProfileHeader';
 import { toast } from 'react-toastify';
+import { getTokenFromLocalStorage } from '../../utils/sliceUtils/userUtils';
+import { isTokenExpired } from '../../utils/common';
 
 export const ProductList = () => {
   const { data, isLoading, error, refetch } = useGetProductsQuery();
@@ -16,15 +19,34 @@ export const ProductList = () => {
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
 
-  const deleteHandler = () => {
-    console.log('deleted');
+  const [deleteProduct, { isLoading: loadingDelete }] =
+    useDeleteProductMutation();
+
+  const deleteHandler = async (productId) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        await deleteProduct(productId);
+        toast.success('Product deleted successfully!');
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error.message);
+      }
+    }
   };
 
   const createProductHandler = async () => {
+    const token = getTokenFromLocalStorage();
+
+    if (isTokenExpired(token)) {
+      toast.error('Session Expired please log back in');
+      return;
+    }
+
     if (window.confirm('Are you sure you want to create a new product?')) {
       try {
         await createProduct();
         refetch();
+        toast.success('Product created!');
       } catch (error) {
         toast.error(error?.data?.message || error.error);
       }
@@ -46,6 +68,9 @@ export const ProductList = () => {
           </Button>
         </Col>
       </Row>
+
+      {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
 
       {isLoading ? (
         <Loader />
