@@ -1,4 +1,5 @@
 import { USERS_URL } from '../../constants/endPoints';
+import { getTokenFromLocalStorage } from '../../utils/sliceUtils/userUtils';
 import { apiSlice } from './apiSlice';
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -33,6 +34,66 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    getUsers: builder.query({
+      query: () => {
+        const token = getTokenFromLocalStorage();
+        return {
+          url: `${USERS_URL}`,
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+      providesTags: [{ type: 'Users', id: 'LIST' }],
+      keepUnusedDataFor: 5,
+    }),
+
+    deleteUser: builder.mutation({
+      query: (userId) => {
+        const token = getTokenFromLocalStorage();
+        return {
+          url: `${USERS_URL}/${userId}`,
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+
+    getUserDetails: builder.query({
+      query: (userId) => {
+        const token = getTokenFromLocalStorage();
+        return {
+          url: `${USERS_URL}/${userId}`,
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'auth-token': token,
+          },
+        };
+      },
+      keepUnusedDataFor: 5,
+    }),
+
+    updateUser: builder.mutation({
+      query: (data) => {
+        const token = getTokenFromLocalStorage();
+
+        return {
+          url: `${USERS_URL}/${data.userId}`,
+          method: 'PUT',
+          body: data,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'auth-token': token,
+          },
+        };
+      },
+      invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+    }),
   }),
 });
 
@@ -41,4 +102,8 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
 } = usersApiSlice;
