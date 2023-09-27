@@ -3,9 +3,15 @@ import { useGetProductsQuery } from '../services/slices/productsApiSlice';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
+import { Link, useParams } from 'react-router-dom';
+import { Paginate } from '../components/Paginate';
 
 export const ExploreScents = () => {
-  const { data: products, isLoading, isError, error } = useGetProductsQuery();
+  const { pageNumber, keyword } = useParams();
+  const { data, isLoading, isError, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  });
 
   return (
     <>
@@ -17,9 +23,9 @@ export const ExploreScents = () => {
         </Message>
       ) : (
         <>
-          <h1>Explore</h1>
+          <h1>Explore Scents</h1>
           <Row>
-            {products.map((product) => (
+            {data.products.map((product) => (
               <LinkContainer
                 to={`/explore-scents/${product.id}`}
                 key={product.id}
@@ -28,6 +34,11 @@ export const ExploreScents = () => {
               </LinkContainer>
             ))}
           </Row>
+          <Paginate
+            pages={data.pages}
+            page={data.page}
+            keyword={keyword ? keyword : ''}
+          />
         </>
       )}
     </>

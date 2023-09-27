@@ -5,8 +5,9 @@ import { getTokenFromLocalStorage } from '../../utils/sliceUtils/userUtils';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL,
+        params: { pageNumber, keyword },
       }),
       keepUnusedDataFor: 5,
       providesTags: ['Product'],
@@ -27,7 +28,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           url: `${PRODUCTS_URL}`,
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -43,7 +44,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           method: 'PUT',
           body: data,
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -67,7 +68,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           method: 'POST',
           body: data,
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -82,7 +83,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           method: 'POST',
           body: data,
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -96,11 +97,25 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           url: `${PRODUCTS_URL}/${productId}`,
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
       invalidatesTags: ['Product'],
+    }),
+
+    createReview: builder.mutation({
+      query: (data) => {
+        const token = getTokenFromLocalStorage();
+        return {
+          url: `${PRODUCTS_URL}/${data.productId}/reviews`,
+          method: 'POST',
+          body: data,
+          headers: {
+            'auth-token': token,
+          },
+        };
+      },
     }),
   }),
 });
@@ -114,4 +129,5 @@ export const {
   useUploadSingleImageMutation,
   useUploadMultipleImagesMutation,
   useDeleteProductMutation,
+  useCreateReviewMutation,
 } = productsApiSlice;

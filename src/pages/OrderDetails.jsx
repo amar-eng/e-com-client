@@ -168,29 +168,31 @@ export const OrderDetails = () => {
               {order.orderItems.length === 0 ? (
                 <Message>Order is empty</Message>
               ) : (
-                order.orderItems.map((item, index) => (
-                  <ListGroup.Item key={index}>
-                    <Row className="d-flex align-items-center">
-                      <Col md={1} className="p-1">
-                        <Image
-                          src={item.product.image}
-                          alt={item.product.name}
-                          fluid
-                          rounded
-                        />
-                      </Col>
-                      <Col>
-                        <Link to={`/explore-scents/${item.product._id}`}>
-                          <p>{item.product.name}</p>
-                        </Link>
-                      </Col>
-                      <Col md={4}>
-                        {item.qty} x ${item.product.price} = $
-                        {item.qty * item.product.price}
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))
+                order.orderItems.map((item, index) => {
+                  return (
+                    <ListGroup.Item key={index}>
+                      <Row className="d-flex align-items-center">
+                        <Col md={1} className="p-1">
+                          <Image
+                            src={item.product.image}
+                            alt={item.product.name}
+                            fluid
+                            rounded
+                          />
+                        </Col>
+                        <Col>
+                          <Link to={`/explore-scents/${item.product._id}`}>
+                            <p>{item.product.name}</p>
+                          </Link>
+                        </Col>
+                        <Col md={4}>
+                          {item.qty} x ${item.product.price} = $
+                          {item.qty * item.product.price}
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  );
+                })
               )}
             </ListGroup.Item>
           </ListGroup>

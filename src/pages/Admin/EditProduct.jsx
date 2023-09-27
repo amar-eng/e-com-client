@@ -45,12 +45,6 @@ export const EditProduct = () => {
     error,
   } = useGetProductDetailsQuery(productId);
 
-  const {
-    data: categoriesData,
-    isLoading: categoriesLoading,
-    error: categoriesError,
-  } = useGetCategoriesQuery();
-
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
@@ -160,6 +154,9 @@ export const EditProduct = () => {
       </Link>
       <FormContainer>
         {loadingUpdate && <Loader />}
+        {loadingImageUpload && <Loader />}
+        {loadingMultipleImageUpload && <Loader />}
+
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -247,17 +244,8 @@ export const EditProduct = () => {
                 <option value="" disabled>
                   Select a category
                 </option>
-                {categoriesLoading ? (
-                  <option>Loading...</option>
-                ) : categoriesError ? (
-                  <option>Error loading categories</option>
-                ) : (
-                  categoriesData.map((cat) => (
-                    <option key={cat._id} value={cat._id}>
-                      {cat.grade}
-                    </option>
-                  ))
-                )}
+                <option value="standard">Standard</option>
+                <option value="premium">Premium</option>
               </Form.Control>
             </Form.Group>
 
@@ -303,6 +291,9 @@ export const EditProduct = () => {
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
+                <option value="" disabled>
+                  Select a gender
+                </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="unisex">Unisex</option>
@@ -315,6 +306,9 @@ export const EditProduct = () => {
                 value={season}
                 onChange={(e) => setSeason(e.target.value)}
               >
+                <option value="" disabled>
+                  Select a season
+                </option>
                 <option value="spring">Spring</option>
                 <option value="summer">Summer</option>
                 <option value="fall">Fall</option>
@@ -328,6 +322,9 @@ export const EditProduct = () => {
                 value={concentration}
                 onChange={(e) => setConcentration(e.target.value)}
               >
+                <option value="" disabled>
+                  Select a concentration
+                </option>
                 <option value="Eau de Parfum">Eau de Parfum</option>
                 <option value="Eau de Toilette">Eau de Toilette</option>
                 <option value="Eau de Cologne">Eau de Cologne</option>
@@ -341,6 +338,9 @@ export const EditProduct = () => {
                 value={vibe}
                 onChange={(e) => setVibe(e.target.value)}
               >
+                <option value="" disabled>
+                  Select a vibe
+                </option>
                 <option value="Floral">Floral</option>
                 <option value="Oriental">Oriental</option>
                 <option value="Woody">Woody</option>
@@ -354,6 +354,9 @@ export const EditProduct = () => {
                 value={occasion}
                 onChange={(e) => setOccasion(e.target.value)}
               >
+                <option value="" disabled>
+                  Select occasion
+                </option>
                 <option value="Night-Out">Night-Out</option>
                 <option value="Everyday-Essentials">Everyday-Essentials</option>
                 <option value="Elegant-Occasions">Elegant-Occasions</option>

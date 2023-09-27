@@ -12,9 +12,14 @@ import { ProfileHeader } from '../../components/ProfileHeader';
 import { toast } from 'react-toastify';
 import { getTokenFromLocalStorage } from '../../utils/sliceUtils/userUtils';
 import { isTokenExpired } from '../../utils/common';
+import { useParams } from 'react-router-dom';
+import { Paginate } from '../../components/Paginate';
 
 export const ProductList = () => {
-  const { data, isLoading, error, refetch } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
 
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
@@ -91,12 +96,12 @@ export const ProductList = () => {
             </thead>
             <tbody>
               {data &&
-                data.map((product) => (
+                data.products.map((product) => (
                   <tr key={product.id}>
                     <td>{product._id}</td>
                     <td>{product.name}</td>
                     <td>${product.price}</td>
-                    <td>{product.category?.grade}</td>
+                    <td>{product.category}</td>
                     <td>{product.brand}</td>
                     <td>
                       <LinkContainer to={`/admin/product/${product._id}/edit`}>
@@ -113,6 +118,7 @@ export const ProductList = () => {
                 ))}
             </tbody>
           </Table>
+          <Paginate page={data.page} pages={data.pages} isAdmin={true} />
         </>
       )}
     </>

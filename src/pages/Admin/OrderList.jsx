@@ -30,42 +30,44 @@ export const OrderList = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
-                <td>{generateFormattedDate(order.createdAt)}</td>
-                <td>${order.totalPrice.toFixed(2)}</td>
-                <td>
-                  {order.isPaid ? (
-                    <>
-                      <img src={check} alt="delivered" />
-                      {generateFormattedDate(order.paidAt)}
-                    </>
-                  ) : (
-                    <img src={x} alt="order-paid" />
-                  )}
-                </td>
-                <td>
-                  {order.isDelivered ? (
-                    <>
-                      <img src={check} alt="delivered" />
-                      {generateFormattedDate(order.deliveredAt)}
-                    </>
-                  ) : (
-                    <img src={x} alt="order-paid" />
-                  )}
-                </td>
+            {[...orders]
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.user && order.user.name}</td>
+                  <td>{generateFormattedDate(order.createdAt)}</td>
+                  <td>${order.totalPrice.toFixed(2)}</td>
+                  <td>
+                    {order.isPaid ? (
+                      <>
+                        <img src={check} alt="delivered" />
+                        {generateFormattedDate(order.paidAt)}
+                      </>
+                    ) : (
+                      <img src={x} alt="order-paid" />
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      <>
+                        <img src={check} alt="delivered" />
+                        {generateFormattedDate(order.deliveredAt)}
+                      </>
+                    ) : (
+                      <img src={x} alt="order-paid" />
+                    )}
+                  </td>
 
-                <td>
-                  <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="secondary" className="btn-sm">
-                      Details
-                    </Button>
-                  </LinkContainer>
-                </td>
-              </tr>
-            ))}
+                  <td>
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button variant="secondary" className="btn-sm">
+                        Details
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       )}

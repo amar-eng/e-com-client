@@ -10,5 +10,21 @@ import edit from '../assets/icons/edit-white-24px.svg';
 import editBlack from '../assets/icons/edit-24px.svg';
 import del from '../assets/icons/delete_outline-24px.svg';
 import add from '../assets/icons/add.svg';
+import error from '../assets/icons/error-24px.svg';
+import sort from '../assets/icons/sort-24px.svg';
+import search from '../assets/icons/search-24px.svg';
 
-export { heroImage, user, shoppingBag, check, x, edit, del, editBlack, add };
+export {
+  heroImage,
+  user,
+  shoppingBag,
+  check,
+  x,
+  edit,
+  del,
+  editBlack,
+  add,
+  error,
+  sort,
+  search,
+};

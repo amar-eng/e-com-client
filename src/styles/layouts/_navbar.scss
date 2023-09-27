@@ -30,11 +30,13 @@
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 100;
+  margin-right: auto;
 }
 .navbar-row {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .cart-badge {
   position: absolute;

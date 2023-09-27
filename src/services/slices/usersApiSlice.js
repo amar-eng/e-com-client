@@ -42,7 +42,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           url: `${USERS_URL}`,
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -57,7 +57,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           url: `${USERS_URL}/${userId}`,
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${token}`,
+            'auth-token': token,
           },
         };
       },
@@ -70,7 +70,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           url: `${USERS_URL}/${userId}`,
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
             'auth-token': token,
           },
         };
@@ -87,7 +86,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           method: 'PUT',
           body: data,
           headers: {
-            Authorization: `Bearer ${token}`,
             'auth-token': token,
           },
         };

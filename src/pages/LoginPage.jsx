@@ -7,6 +7,7 @@ import { Loader } from '../components/Loader';
 import { useLoginMutation } from '../services/slices/usersApiSlice';
 import { setCredentials } from '../services/slices/authSlice';
 import { toast } from 'react-toastify';
+import { notifySuccess } from '../components/notifications';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,7 @@ export const LoginPage = () => {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
-      toast.success('Logged in successfully, please wait');
+      notifySuccess('Logged in successfully');
     } catch (error) {
       toast.error(error?.data?.message || error.data);
     }
