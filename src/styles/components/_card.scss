@@ -1,31 +1,17 @@
-.card-container {
-  border: 1px solid black;
-  margin: 0.5rem 0.25rem;
-  background-color: $grey;
-  width: 160px;
-  height: 360px;
-  &__like {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    &-button {
-      fill: $red !important;
-      cursor: pointer;
-    }
-  }
+.custom-card {
+  background-color: $white;
+  border: none; /* Remove border */
+  width: 300px; /* Set a fixed width for the card */
+  margin: 0 auto; /* Center the card */
+  text-align: center; /* Center the text */
 }
 
-.card-content {
-  width: 100%;
-  border: 1px solid blue;
-  height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.card-img {
+  width: 100%; /* Set width */
+  height: 200px; /* Set height */
+  object-fit: contain; /* Cover the entire space */
+}
 
-  &__img {
-    object-fit: contain;
-    object-position: center;
-  }
+.custom-like {
+  text-align: right;
 }

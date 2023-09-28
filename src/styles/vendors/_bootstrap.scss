@@ -1,4 +1,5 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
+@import '../variables/colors';
 
 Link {
   color: transparent;
@@ -102,4 +103,29 @@ Link {
   .fullWidthButton {
     width: 100%;
   }
+}
+
+// Carousel
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 30px;
+  width: 30px;
+  background-size: 100%, 100%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: invert(100%);
+}
+
+.carousel-indicators {
+  bottom: -45px;
+}
+
+.carousel-indicators button {
+  background-color: $off-black !important;
+}
+
+.carousel-indicators .active {
+  background-color: black !important;
 }

@@ -1,30 +1,57 @@
 .hero {
+  background-color: $white;
+  color: $black;
+  text-align: center;
+  height: 60vh;
+  display: flex; /* make this a flex container */
+  align-items: stretch; /* ensure children stretch vertically */
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center the content */
+  align-items: center; /* horizontally center the content */
+}
+
+.hero__header {
+  @include antic;
+  @include fontSizeAndColor($large-heading, $black);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+
+  &-paragraph {
+    @include fontSizeAndColor($small-heading, $black);
+    text-transform: none;
+    @include antic;
+    margin-bottom: 1rem;
+  }
+}
+
+.hero__buttons {
+  @include flex(center, space-between, row);
+  width: 100%;
+}
+
+.hero__image {
   background-image: url('../../assets/images/heroImage.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  text-align: center;
-  background-color: $white;
-  color: $black;
-  @include flex(center, space-between, column);
-  height: 60vh;
+  flex: 1; /* this will ensure it grows and takes up space */
+}
 
-  &__header {
-    @include antic;
-    @include fontSizeAndColor($large-heading, $black);
-    text-transform: capitalize;
-    &-span {
-      @include fontSizeAndColor($large-heading, $gold);
-    }
-    &-paragraph {
-      @include fontSizeAndColor($small-heading, $black);
-      text-transform: none;
-      @include antic;
-    }
-  }
+.hero__header-paragraph span {
+  position: relative;
+}
 
-  &__buttons {
-    @include flex(center, space-between, row);
-    width: 100%;
-  }
+.hero__header-paragraph span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: red;
+  z-index: 1;
 }
