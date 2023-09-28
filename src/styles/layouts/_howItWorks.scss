@@ -1,0 +1,41 @@
+.works-row {
+  @include flex(center, center, row);
+
+  margin: 0 3rem;
+  text-align: center;
+}
+
+.step-col {
+  position: relative;
+  @include flex(center, center, column);
+
+  &__header {
+    margin: 0.75rem 0;
+    @include bold-font;
+    text-transform: capitalize;
+    @include fontSizeAndColor(20px, $black);
+  }
+
+  &__p {
+    width: 80%;
+    @include fontSizeAndColor(15px, $black);
+    @include light-font;
+  }
+}
+
+.step-number {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 100%;
+  background-color: $navy-blue;
+  padding: 1.5rem;
+  color: $white;
+  @include flex(center, center, row);
+  z-index: 1;
+  @include antic;
+}

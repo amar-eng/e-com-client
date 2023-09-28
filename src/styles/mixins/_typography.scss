@@ -1,6 +1,9 @@
 @mixin light-font {
   font-family: 'Raleway-Light';
 }
+@mixin bold-font {
+  font-family: 'Raleway-Bold';
+}
 
 @mixin normal-font {
   font-family: 'Quicksand';

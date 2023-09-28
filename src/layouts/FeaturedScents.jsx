@@ -4,19 +4,33 @@ import { useParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../services/slices/productsApiSlice';
 import { useState } from 'react';
 import { SectionHeader } from '../components/SectionHeaders';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 export const FeaturedScents = () => {
   const [index, setIndex] = useState(0);
+  const windowWidth = useWindowWidth();
 
   const { pageNumber, keyword } = useParams();
   const { data } = useGetProductsQuery({ pageNumber, keyword });
 
   const filteredProducts =
     data?.products?.filter((product) => product.isFeatured) || [];
-  const productChunks = [];
 
-  for (let i = 0; i < filteredProducts.length - 1; i++) {
-    productChunks.push(filteredProducts.slice(i, i + 3));
+  let itemsToShow;
+  if (windowWidth <= 576) {
+    // mobile
+    itemsToShow = 1;
+  } else if (windowWidth <= 992) {
+    // tablet
+    itemsToShow = 2;
+  } else {
+    // desktop
+    itemsToShow = 3;
+  }
+
+  const productChunks = [];
+  for (let i = 0; i < filteredProducts.length; i += itemsToShow) {
+    productChunks.push(filteredProducts.slice(i, i + itemsToShow));
   }
 
   const handleSelect = (selectedIndex, e) => {
@@ -25,7 +39,7 @@ export const FeaturedScents = () => {
 
   return (
     <>
-      <SectionHeader text="Featured Scents" />
+      <SectionHeader text="Explore Our Top Selected Scents" />
       <Carousel
         interval={null}
         activeIndex={index}

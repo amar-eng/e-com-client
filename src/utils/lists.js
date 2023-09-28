@@ -1,6 +1,9 @@
 // Images
 import heroImage from '../assets/images/heroImage.svg';
-
+import scent1 from '../assets/images/scent1.svg';
+import scent2 from '../assets/images/scent2.svg';
+import scent3 from '../assets/images/scent3.svg';
+import scent4 from '../assets/images/scent4.svg';
 // icons
 import user from '../assets/icons/user.svg';
 import shoppingBag from '../assets/icons/shopping-bag.svg';
@@ -27,4 +30,8 @@ export {
   error,
   sort,
   search,
+  scent1,
+  scent2,
+  scent3,
+  scent4,
 };
