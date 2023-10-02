@@ -9,7 +9,7 @@ export const App = () => {
       <div className="app-container">
         <Navbar />
         <ToastContainer />
-        <main className="py-3">
+        <main>
           <Container>
             <Outlet />
           </Container>
