@@ -7,11 +7,11 @@ export const Rating = ({ value }) => {
     const roundedValue = Math.ceil(value * 2) / 2;
 
     if (roundedValue >= index) {
-      return <StarRateIcon />;
+      return <StarRateIcon style={{ fill: 'gold' }} />;
     } else if (roundedValue >= index - 0.5 && roundedValue < index) {
-      return <StarHalfOutlinedIcon />;
+      return <StarHalfOutlinedIcon style={{ fill: 'gold' }} />;
     } else {
-      return <StarBorderOutlinedIcon />;
+      return <StarBorderOutlinedIcon style={{ fill: 'gold' }} />;
     }
   };
 

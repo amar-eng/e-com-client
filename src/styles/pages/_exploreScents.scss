@@ -1,0 +1,45 @@
+.search-box-wrapper {
+  @include flex(center, center, row);
+}
+.filter-wrapper {
+  @include flex(center, center, row);
+  margin: 1rem;
+}
+.select-filter {
+  background-color: $navy-blue;
+  width: 70%;
+  @include fontSizeAndColor(12px, $white);
+  border-radius: 20px !important;
+  text-align: center;
+  cursor: pointer;
+}
+
+.select-filter:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.select-filter:focus option:first-child {
+  display: none;
+}
+
+.card-comp {
+  border: 1px solid $red;
+  border-radius: 0;
+  @include flex(center, center, column);
+  width: 70%;
+  &__img {
+    width: 100px;
+    object-fit: cover;
+    height: 100px;
+  }
+}
+
+.reset-btn {
+  background-color: $red;
+  width: 70%;
+  @include fontSizeAndColor(12px, $white);
+  border-radius: 20px !important;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+}

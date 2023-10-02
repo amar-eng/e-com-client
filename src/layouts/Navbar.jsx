@@ -8,7 +8,6 @@ import { logout } from '../services/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { notifySuccess } from '../components/notifications';
-import { SearchBox } from '../components/Searchbox';
 
 export const AppNavbar = () => {
   const cartItems = useCartItems();
@@ -36,7 +35,6 @@ export const AppNavbar = () => {
             </Col>
           </LinkContainer>
 
-          <SearchBox />
           <LinkContainer to="/cart">
             <Col xs="auto" className="navbar-item">
               <div style={{ display: 'flex', alignItems: 'center' }}>

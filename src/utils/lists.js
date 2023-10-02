@@ -4,6 +4,7 @@ import scent1 from '../assets/images/scent1.svg';
 import scent2 from '../assets/images/scent2.svg';
 import scent3 from '../assets/images/scent3.svg';
 import scent4 from '../assets/images/scent4.svg';
+import banner from '../assets/images/banner.svg';
 // icons
 import user from '../assets/icons/user.svg';
 import shoppingBag from '../assets/icons/shopping-bag.svg';
@@ -16,6 +17,7 @@ import add from '../assets/icons/add.svg';
 import error from '../assets/icons/error-24px.svg';
 import sort from '../assets/icons/sort-24px.svg';
 import search from '../assets/icons/search-24px.svg';
+import arrowDown from '../assets/icons/arrow-down.svg';
 
 export {
   heroImage,
@@ -34,4 +36,6 @@ export {
   scent2,
   scent3,
   scent4,
+  banner,
+  arrowDown,
 };

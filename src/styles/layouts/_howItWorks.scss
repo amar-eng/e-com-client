@@ -11,15 +11,16 @@
 
   &__header {
     margin: 0.75rem 0;
-    @include bold-font;
+    @include antic;
     text-transform: capitalize;
     @include fontSizeAndColor(20px, $black);
   }
 
   &__p {
-    width: 80%;
-    @include fontSizeAndColor(15px, $black);
+    width: 85%;
+    @include fontSizeAndColor(14px, $black);
     @include light-font;
+    height: 10vh;
   }
 }
 

@@ -1,0 +1,23 @@
+.banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 20% 70%;
+  height: 40vh;
+  @include flex(center, center, column);
+
+  &__title {
+    @include antic;
+    @include fontSizeAndColor(30px, $off-white);
+    margin-bottom: 2rem;
+
+    &-span {
+      color: $yellow;
+    }
+  }
+
+  &__p {
+    margin-bottom: 5rem;
+    @include thin-font;
+    @include fontSizeAndColor(20px, $off-white);
+  }
+}

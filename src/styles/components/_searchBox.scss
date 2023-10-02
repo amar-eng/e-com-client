@@ -1,0 +1,42 @@
+/* SearchBox */
+.searchbox {
+  background-color: $white;
+  border-radius: 25px;
+  padding: 5px 20px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid $black;
+  width: 80%;
+  margin-top: 1rem;
+}
+
+.searchbox__input {
+  border: none;
+  background-color: $white;
+  background-image: url('../../assets/icons/search-24px.svg'); /* If using as a background */
+  background-repeat: no-repeat;
+  background-position: 100% center;
+  padding: 5px 10px 5px 35px; /* Adjusted padding to account for icon */
+  height: 35px;
+  width: 100%; /* You can adjust this as needed */
+  font-size: 14px;
+  color: #333;
+}
+
+.searchbox__input:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $white;
+}
+
+.searchbox__btn {
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: #333;
+  padding: 0;
+  margin-left: 10px;
+  cursor: pointer;
+}
