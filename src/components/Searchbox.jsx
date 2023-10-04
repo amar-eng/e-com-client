@@ -19,7 +19,7 @@ export const SearchBox = () => {
       }
       setKeyword('');
     } else {
-      navigate('/');
+      navigate('/explore-scents');
     }
   };
   return (

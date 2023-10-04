@@ -30,27 +30,8 @@ export const AppNavbar = () => {
       <Navbar className="custom-navbar">
         <Row className="navbar-row">
           <LinkContainer to="/">
-            <Col className="navbar-item" md={1}>
-              <div className="navbar-logo">aroma</div>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to="/cart">
-            <Col xs="auto" className="navbar-item">
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img
-                  src={shoppingBag}
-                  style={{
-                    width: '25px',
-                  }}
-                />
-
-                {cartItems.length > 0 && (
-                  <div className="cart-item-count">
-                    {cartItems.reduce((a, c) => a + c.qty, 0)}
-                  </div>
-                )}
-              </div>
+            <Col className="navbar-item" md={9}>
+              <div className="navbar-logo">Al-Misk</div>
             </Col>
           </LinkContainer>
 
@@ -87,6 +68,25 @@ export const AppNavbar = () => {
                       <NavDropdown.Item>Users</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
+                )}
+              </div>
+            </Col>
+          </LinkContainer>
+
+          <LinkContainer to="/cart">
+            <Col xs="auto" className="navbar-item">
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={shoppingBag}
+                  style={{
+                    width: '25px',
+                  }}
+                />
+
+                {cartItems.length > 0 && (
+                  <div className="cart-item-count">
+                    {cartItems.reduce((a, c) => a + c.qty, 0)}
+                  </div>
                 )}
               </div>
             </Col>

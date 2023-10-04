@@ -24,13 +24,16 @@
 }
 
 @mixin logo-font {
-  // font-family: 'Quicksand';
-  font-family: 'Italiana';
-  // font-family: 'AnticDidone';
-  letter-spacing: -1px;
   font-family: 'Carmorant';
 }
 
 @mixin alternate-font {
   font-family: 'TitilliumWeb';
+}
+
+@mixin outfit-light {
+  font-family: 'Outfit-Thin';
+}
+@mixin outfit-Reg {
+  font-family: 'Outfit-Light';
 }

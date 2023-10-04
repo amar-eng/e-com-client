@@ -1,0 +1,39 @@
+.scent {
+  &__img {
+    border-radius: 10px;
+    height: 360px;
+  }
+
+  &__featured {
+    @include fontSizeAndColor(11px, $orange);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+  }
+
+  &__name {
+    @include fontSizeAndColor(30px, $navy-blue);
+    @include bold-font;
+  }
+
+  &__desc {
+    width: 70%;
+    @include fontSizeAndColor(16px, $navy-blue);
+    margin: 1rem 0;
+  }
+
+  &__price {
+    @include bold-font;
+  }
+
+  &__counter {
+    width: 30%;
+
+    @include flex(center, space-between, row);
+  }
+
+  &__bottom {
+    width: 50%;
+    margin: 3rem;
+    @include flex(center, space-between, row);
+  }
+}

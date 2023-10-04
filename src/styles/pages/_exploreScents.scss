@@ -7,7 +7,7 @@
 }
 .select-filter {
   background-color: $navy-blue;
-  width: 70%;
+  width: 90%;
   @include fontSizeAndColor(12px, $white);
   border-radius: 20px !important;
   text-align: center;
@@ -36,7 +36,7 @@
 
 .reset-btn {
   background-color: $red;
-  width: 70%;
+  width: 90%;
   @include fontSizeAndColor(12px, $white);
   border-radius: 20px !important;
   text-align: center;

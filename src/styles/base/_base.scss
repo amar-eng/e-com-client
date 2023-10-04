@@ -15,6 +15,10 @@
   @include thin-font;
   background-color: $white;
 
+  @include desktop {
+    margin: 0 3rem;
+  }
+
   table img {
     width: 20px;
   }

@@ -8,12 +8,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
 import { addToCart } from '../services/slices/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { generateQuantitySelectOptions } from '../utils/common';
 import { toast } from 'react-toastify';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { Rating } from '../components/Rating';
 import RatingSelector from '../components/RatingSelector';
+import { LinkContainer } from 'react-router-bootstrap';
+import { GoBack } from '../components/GoBack';
 
 export const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -49,6 +51,19 @@ export const ProductDetails = () => {
     );
   }
 
+  const decrementQty = () => {
+    if (qty > 1) {
+      // assuming you don't want to go below 1
+      setQty(qty - 1);
+    }
+  };
+
+  const incrementQty = () => {
+    if (qty < scent.countInStock) {
+      setQty(qty + 1);
+    }
+  };
+
   const scent = product.product;
   const quantitySelectOptions = generateQuantitySelectOptions(
     scent.countInStock
@@ -83,7 +98,60 @@ export const ProductDetails = () => {
   };
   return (
     <>
-      <Col>{scent.name}</Col>
+      <GoBack to="/explore-scents" />
+
+      <Row className="scent">
+        <Col md={4}>
+          <img src={scent.image} alt={scent.name} className="scent__img" />
+        </Col>
+        <Col md={8}>
+          <Col className="scent__featured">Best for {scent.occasion}</Col>
+          <Col className="scent__name">{scent.name}</Col>
+          <Col className="scent__desc">{scent.description}</Col>
+
+          <Col className="mb-4">
+            <Row>
+              <Col>{scent.concentration}</Col>
+              <Col>{scent.gender}</Col>
+              <Col>{scent.season}</Col>
+            </Row>
+          </Col>
+          <Col className="scent__price">${scent.price}</Col>
+          <Row className="scent__bottom">
+            <div className="scent__counter">
+              <Button
+                onClick={decrementQty}
+                disabled={qty <= 1}
+                className="scent__btn"
+              >
+                -
+              </Button>
+
+              <div>{qty}</div>
+
+              <Button
+                onClick={incrementQty}
+                disabled={qty >= scent.countInStock}
+                className="scent__btn"
+              >
+                +
+              </Button>
+            </div>
+            <Col>
+              <Button
+                className="third-button"
+                type="button"
+                disabled={scent.countInStock <= 0}
+                onClick={addToCartHandler}
+              >
+                Add to Cart
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+
+      {/* <Col>{scent.name}</Col>
       <Col>
         {scent.concentration} - Best for {scent.occasion}
       </Col>
@@ -239,7 +307,7 @@ export const ProductDetails = () => {
             </ListGroup>
           </Col>
         </Row>
-      </Row>
+      </Row> */}
     </>
   );
 };

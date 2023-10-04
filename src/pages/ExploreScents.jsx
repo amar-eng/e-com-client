@@ -1,6 +1,5 @@
-import { Row, Col, Form, Card, Button } from 'react-bootstrap';
+import { Row, Col, Form } from 'react-bootstrap';
 import { useGetProductsQuery } from '../services/slices/productsApiSlice';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
 import { useParams } from 'react-router-dom';
@@ -10,7 +9,6 @@ import { exploreData } from '../utils/heroData';
 import { SearchBox } from '../components/Searchbox';
 import { SectionHeader } from '../components/SectionHeaders';
 import { useState } from 'react';
-import { Rating } from '../components/Rating';
 import { CardComponent } from '../components/CardComponent';
 
 export const ExploreScents = () => {
@@ -125,34 +123,6 @@ export const ExploreScents = () => {
                       key={product.id}
                       className="d-flex align-item-center justify-content-center"
                     >
-                      {/* <Card className="card-comp">
-                        <div className="card-like-icon"> */}
-                      {/* Insert your like icon here */}
-                      {/* </div>
-                        <Card.Img
-                          variant="top"
-                          src={product.image}
-                          className="card-comp__img"
-                        />
-                        <Card.Body className="d-flex flex-column">
-                          <Card.Title>
-                            {product.name} - {product.concentration}
-                          </Card.Title>
-                          <Card.Text>
-                            {product.season} - {product.gender} -{' '}
-                            {product.longevity}
-                          </Card.Text>
-                          <Rating value={product.rating} />
-                          <LinkContainer
-                            to={`/explore-scents/${product.id}`}
-                            className="mt-auto"
-                          >
-                            <Button variant="primary" className="w-100">
-                              View Details
-                            </Button>
-                          </LinkContainer>
-                        </Card.Body>
-                      </Card> */}
                       <CardComponent {...product} />
                     </Col>
                   ))}

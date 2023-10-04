@@ -8,7 +8,6 @@ export const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
         {[...Array(pages).keys()].map((x) => {
           let baseLink = !isAdmin ? '/explore-scents' : '/admin/productlist';
 
-          // Modify the base link according to the presence of a keyword.
           if (keyword) {
             baseLink = `${baseLink}/search/${keyword}`;
           }
