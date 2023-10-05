@@ -16,6 +16,7 @@ import { Rating } from '../components/Rating';
 import RatingSelector from '../components/RatingSelector';
 import { LinkContainer } from 'react-router-bootstrap';
 import { GoBack } from '../components/GoBack';
+import { ImageGallery } from '../components/ImageGallery';
 
 export const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -100,7 +101,7 @@ export const ProductDetails = () => {
     <>
       <GoBack to="/explore-scents" />
 
-      <Row className="scent">
+      <Row className="scent align-items-center ">
         <Col md={4}>
           <img src={scent.image} alt={scent.name} className="scent__img" />
         </Col>
@@ -148,6 +149,17 @@ export const ProductDetails = () => {
               </Button>
             </Col>
           </Row>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={8}>Features</Col>
+        <Col md={4}>items</Col>
+      </Row>
+      <Row className="d-flex align-items-center ">
+        <Col md={4}>{scent.richDescription}</Col>
+        <Col md={8}>
+          <ImageGallery {...scent} />
         </Col>
       </Row>
 
