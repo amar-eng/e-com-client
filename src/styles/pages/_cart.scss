@@ -1,0 +1,22 @@
+.cart {
+  &__name {
+    @include fontSizeAndColor(17px, $black);
+    @include bold-font;
+  }
+
+  &__price {
+    @include fontSizeAndColor(12px, $black);
+    @include outfit-light;
+  }
+
+  &__total {
+    @include fontSizeAndColor(15px, $black);
+    @include outfit-light;
+    text-transform: uppercase;
+  }
+
+  &__totalPrice {
+    @include fontSizeAndColor(15px, $black);
+    @include bold-font;
+  }
+}

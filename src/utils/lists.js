@@ -18,6 +18,16 @@ import error from '../assets/icons/error-24px.svg';
 import sort from '../assets/icons/sort-24px.svg';
 import search from '../assets/icons/search-24px.svg';
 import arrowDown from '../assets/icons/arrow-down.svg';
+import top from '../assets/icons/topy.svg';
+import base from '../assets/icons/basy.svg';
+import heart from '../assets/icons/hearty.svg';
+import man from '../assets/icons/man.svg';
+import woman from '../assets/icons/woman.svg';
+import unisex from '../assets/icons/couple.svg';
+import summer from '../assets/icons/sun.svg';
+import spring from '../assets/icons/leaf.svg';
+import fall from '../assets/icons/maple-leaf.svg';
+import winter from '../assets/icons/winter.svg';
 
 export {
   heroImage,
@@ -38,4 +48,14 @@ export {
   scent4,
   banner,
   arrowDown,
+  top,
+  base,
+  heart,
+  man,
+  woman,
+  unisex,
+  summer,
+  spring,
+  fall,
+  winter,
 };

@@ -28,6 +28,7 @@ export const EditProduct = () => {
   const [countInStock, setCountInStock] = useState(0);
   const [rating, setRating] = useState(0);
   const [numReviews, setNumReviews] = useState(0);
+  const [longevity, setLongevity] = useState(1);
   const [isFeatured, setIsFeatured] = useState(false);
   const [gender, setGender] = useState('');
   const [season, setSeason] = useState('');
@@ -78,6 +79,7 @@ export const EditProduct = () => {
       setMiddleNotes(product.product.middleNotes || []);
       setBaseNotes(product.product.baseNotes || []);
       setOccasion(product.product.occasion || '');
+      setLongevity(product.product.longevity || 1);
     }
   }, [product]);
 
@@ -106,6 +108,7 @@ export const EditProduct = () => {
         middleNotes,
         baseNotes,
         occasion,
+        longevity,
       }).unwrap();
       toast.success('Product updated');
       refetch();
@@ -231,6 +234,15 @@ export const EditProduct = () => {
                 placeholder="Enter price"
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="longevity">
+              <Form.Label>longevity</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter longevity 1-5"
+                value={longevity}
+                onChange={(e) => setLongevity(Number(e.target.value))}
               ></Form.Control>
             </Form.Group>
 

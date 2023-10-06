@@ -1,0 +1,22 @@
+.longevity {
+  display: flex;
+  align-items: center;
+
+  &__container {
+    background-color: #f0eeee;
+    border-radius: 25px;
+    height: 10px;
+    overflow: hidden;
+    margin-left: 1rem;
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: 25px;
+  }
+
+  &__p {
+    color: $orange;
+    line-height: 20px;
+  }
+}

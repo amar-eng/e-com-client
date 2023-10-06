@@ -36,4 +36,26 @@
     margin: 3rem;
     @include flex(center, space-between, row);
   }
+
+  &__date {
+    @include fontSizeAndColor(12px, $navy-blue);
+  }
+
+  &__comment {
+    @include fontSizeAndColor(14px, $navy-blue);
+  }
+
+  &__reviewName {
+    @include bold-font;
+    @include fontSizeAndColor(16px, $navy-blue);
+  }
+
+  &__btn {
+    background-color: $grey !important;
+    border: 1px solid $grey !important;
+    color: $navy-blue !important;
+  }
+  &__counter {
+    background-color: $grey !important;
+  }
 }

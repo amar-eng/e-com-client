@@ -1,0 +1,22 @@
+.notes {
+  &__group {
+    display: flex;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+
+  &__header {
+    @include outfit-light;
+    @include fontSizeAndColor(24px, $orange);
+    text-transform: uppercase;
+  }
+
+  &__p {
+    @include outfit-light;
+    @include fontSizeAndColor(16px, $navy-blue);
+  }
+}
