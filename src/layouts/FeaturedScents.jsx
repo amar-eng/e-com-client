@@ -39,7 +39,7 @@ export const FeaturedScents = () => {
 
   return (
     <>
-      <SectionHeader text="Explore Our Top Selected Scents" />
+      <SectionHeader text="Our Top Selected Scents" />
       <Carousel
         interval={null}
         activeIndex={index}

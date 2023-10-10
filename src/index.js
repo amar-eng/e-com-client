@@ -33,6 +33,7 @@ import { ProductList } from './pages/Admin/ProductList';
 import { EditProduct } from './pages/Admin/EditProduct';
 import { UserLists } from './pages/Admin/UsersList';
 import { EditUser } from './pages/Admin/EditUser';
+import { Checkout } from './pages/Checkout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
         <Route path="my-profile" element={<Profile />} />
         <Route path="my-account" element={<Account />} />
         <Route path="my-orders" element={<MyOrders />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Route>
 
       <Route path="" element={<AdminRoute />}>

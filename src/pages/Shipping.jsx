@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Form, Button, Nav } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { FormContainer } from '../components/FormContainer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveShippingAddress } from '../services/slices/cartSlice';
 import { CheckoutSteps } from '../layouts/CheckoutSteps';
-import { useShippingAddress } from '../hooks/useCartInfo';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useCartItems, useShippingAddress } from '../hooks/useCartInfo';
+import { GoBack } from '../components/GoBack';
+import { Payment } from './Payment';
+import { PlaceOrder } from './PlaceOrder';
 
 export const Shipping = () => {
   const shippingAddress = useShippingAddress();
@@ -31,14 +33,19 @@ export const Shipping = () => {
     navigate('/payment');
   };
 
+  const cartItems = useCartItems();
+  const lastProductId = cartItems[cartItems.length - 1]?.product?._id;
+  console.log(lastProductId);
+
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 />
-      <LinkContainer to="/cart">
-        <Nav.Link className="my-2 px-5" style={{}}>
-          Go Back
-        </Nav.Link>
-      </LinkContainer>
+      {/* <CheckoutSteps step1 step2 /> */}
+      <GoBack
+        to={
+          lastProductId ? `/explore-scents/${lastProductId}` : `/explore-scents`
+        }
+      />
+
       <h3>Shipping Details</h3>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address" className="my-2">
@@ -81,6 +88,8 @@ export const Shipping = () => {
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Payment />
+        <PlaceOrder />
         <Button type="submit" variant="warning" className="my-2 px-2">
           Continue
         </Button>

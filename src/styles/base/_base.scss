@@ -13,7 +13,6 @@
 
   font-size: $small-heading;
   @include thin-font;
-  background-color: $white;
 
   @include desktop {
     margin: 0 3rem;
@@ -24,6 +23,6 @@
   }
 }
 
-html {
+body {
   background-color: $white;
 }

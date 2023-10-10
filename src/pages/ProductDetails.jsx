@@ -82,9 +82,7 @@ export const ProductDetails = () => {
   };
 
   const scent = product.product;
-  const quantitySelectOptions = generateQuantitySelectOptions(
-    scent.countInStock
-  );
+
   const addToCartHandler = () => {
     dispatch(
       addToCart({

@@ -21,7 +21,7 @@ export const Cart = () => {
   };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping');
+    navigate('/login?redirect=/checkout');
   };
 
   const decrementQty = (item) => {
@@ -79,7 +79,7 @@ export const Cart = () => {
                             -
                           </Button>
 
-                          <div classname="scent__counter-num">{item.qty}</div>
+                          <div classame="scent__counter-num">{item.qty}</div>
 
                           <Button
                             onClick={() => incrementQty(item)}

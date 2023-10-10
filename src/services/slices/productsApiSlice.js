@@ -61,7 +61,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     uploadSingleImage: builder.mutation({
       query: (data) => {
         const token = getTokenFromLocalStorage();
-        console.log(token);
 
         return {
           url: `${PRODUCTS_URL}/upload`,

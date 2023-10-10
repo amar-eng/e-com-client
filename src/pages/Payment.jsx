@@ -28,7 +28,7 @@ export const Payment = () => {
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 step3 />
+      {/* <CheckoutSteps step1 step2 step3 /> */}
       <h3>Payment Method</h3>
       <Form onSubmit={submitHandler}>
         <Form.Group>
@@ -37,18 +37,28 @@ export const Payment = () => {
             <Form.Check
               type="radio"
               className="my-2"
-              label="Paypal or Credit Card"
+              label="Paypal"
               id="PayPal"
               name="paymentMehtod"
               value="PayPal"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
+            <Form.Check
+              type="radio"
+              className="my-2"
+              label="Credit Card"
+              id="CreditCard"
+              name="paymentMehtod"
+              value="creditCard"
+              checked
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></Form.Check>
           </Col>
         </Form.Group>
-        <Button type="submit" variant="warning">
+        {/* <Button type="submit" variant="warning">
           Continue
-        </Button>
+        </Button> */}
       </Form>
     </FormContainer>
   );

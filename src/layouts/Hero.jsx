@@ -14,7 +14,7 @@ export const Hero = () => {
             surprise.
           </p>
           <p className="hero__header-paragraph">
-            First Purchase for just <span>$24.99</span> $12.49.
+            For the month of October <span>$24.99</span> $12.49.
           </p>
           <p className="hero__header-paragraph">Fragrance is forever</p>
         </div>
@@ -22,7 +22,7 @@ export const Hero = () => {
         <Row className="hero__buttons">
           <LinkContainer to="/explore-scents">
             <Col>
-              <Buttons text="Try A Subscription " />
+              <Buttons text="Expolore Scents " />
             </Col>
           </LinkContainer>
         </Row>
