@@ -20,3 +20,19 @@
     @include bold-font;
   }
 }
+
+.continue-shopping {
+  @include flex(center, center, row);
+  @include fontSizeAndColor(12px, $black);
+  @include outfit-light;
+  margin: 1rem 0 0 0;
+
+  &--text {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    &:hover {
+      border-bottom: 1px solid $orange;
+      transition: 1s ease-in-out;
+    }
+  }
+}

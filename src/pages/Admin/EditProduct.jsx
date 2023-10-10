@@ -4,7 +4,6 @@ import { ProfileHeader } from '../../components/ProfileHeader';
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
-  useGetCategoriesQuery,
   useUploadSingleImageMutation,
   useUploadMultipleImagesMutation,
 } from '../../services/slices/productsApiSlice';

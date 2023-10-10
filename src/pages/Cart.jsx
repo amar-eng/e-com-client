@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import { useCartItems } from '../hooks/useCartInfo';
 import { generateQuantitySelectOptions } from '../utils/common';
 import { addToCart, removeFromCart } from '../services/slices/cartSlice';
+import { LinkContainer } from 'react-router-bootstrap';
 
-export const Cart = () => {
+export const Cart = ({ handleCloseModal }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useCartItems();
@@ -119,7 +120,7 @@ export const Cart = () => {
               .toFixed(2)}
           </Col>
         </Row>
-        <Row className="mx-5">
+        <Row className="mx-5" onClick={handleCloseModal}>
           <Button
             disabled={cartItems.length === 0}
             onClick={checkoutHandler}
@@ -127,6 +128,13 @@ export const Cart = () => {
           >
             Checkout
           </Button>
+        </Row>
+        <Row xs={12}>
+          <LinkContainer to="/explore-scents" onClick={handleCloseModal}>
+            <div className="continue-shopping">
+              <p className="continue-shopping--text">Continue Shopping</p>
+            </div>
+          </LinkContainer>
         </Row>
       </Col>
     </Row>

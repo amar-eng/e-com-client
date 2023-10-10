@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useShippingAddress } from '../hooks/useCartInfo';
 
 export const Payment = () => {
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

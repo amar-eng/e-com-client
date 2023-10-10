@@ -5,6 +5,9 @@ import scent2 from '../assets/images/scent2.svg';
 import scent3 from '../assets/images/scent3.svg';
 import scent4 from '../assets/images/scent4.svg';
 import banner from '../assets/images/banner.svg';
+import aeru from '../assets/images/aeru-official-ItrdjmvTdCY-unsplash.jpg';
+import hero1 from '../assets/images/hero1.jpg';
+import hero2 from '../assets/images/hero2.jpg';
 // icons
 import user from '../assets/icons/user.svg';
 import shoppingBag from '../assets/icons/shopping-bag.svg';
@@ -58,4 +61,7 @@ export {
   spring,
   fall,
   winter,
+  aeru,
+  hero1,
+  hero2,
 };

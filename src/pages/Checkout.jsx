@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, ListGroup, Row, Image, Button, Form } from 'react-bootstrap';
 import { useCart, useCartItems } from '../hooks/useCartInfo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoBack } from '../components/GoBack';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import {
+  saveShippingAddress,
+  savePaymentMethod,
+  clearCartItems,
+} from '../services/slices/cartSlice';
+import { useUserInfo } from '../hooks/useUserInfo';
+import { useCreateOrderMutation } from '../services/slices/ordersApiSlice';
+import { toast } from 'react-toastify';
 
 export const Checkout = () => {
+  const cart = useCart();
   const cartItems = useCartItems();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+
+  const { id, name, email } = useUserInfo();
+
   const lastProductId = cartItems[cartItems.length - 1]?.product?._id;
   const { totalPrice, shippingPrice, itemsPrice, taxPrice } = useCart();
 
@@ -15,36 +32,125 @@ export const Checkout = () => {
     billingName: Yup.string().required('Please enter a valid name'),
     billingEmail: Yup.string()
       .email('Invalid email format')
-      .required('Email is required'),
-    billingPhone: Yup.string().required('Phone number is required'),
-    shippingAddress: Yup.string().required('Address is required'),
-    shippingZipCode: Yup.string().required('Zip Code is required'),
+      .required('Please enter a valid email'),
+    billingPhone: Yup.string()
+      .max(12, 'We Only accept US and Candian Phone Numbers at this moment')
+      .required('Please enter a valid phone number'),
+    shippingAddress: Yup.string().required('Please enter a valid address'),
+    shippingPostalCode: Yup.string().required(
+      'Please enter a valid Canadian postal code / US zip code'
+    ),
+
     shippingCity: Yup.string().required('City is required'),
     shippingState: Yup.string().required('State is required'),
-    shippingCountry: Yup.string().required('Country is required'),
-    paymentMethod: Yup.string().required('Payment method is required'),
+    shippingCountry: Yup.string()
+      .oneOf(['USA', 'Canada'], 'Country must be either USA or Canada')
+      .required('Country is required'),
+
+    paymentMethod: Yup.string().required('Please choose a payment method'),
   });
+
+  const handlePhoneChange = (e) => {
+    const rawValue = e.target.value.replace(/\D/g, '');
+    let formattedValue;
+    if (rawValue.length <= 3) {
+      formattedValue = rawValue;
+    } else if (rawValue.length <= 6) {
+      formattedValue = rawValue.replace(/(\d{3})(\d{0,3})/, '$1-$2');
+    } else {
+      formattedValue = rawValue.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1-$2-$3');
+    }
+    formik.setFieldValue('billingPhone', formattedValue);
+  };
+
+  const handlePostalCodeChange = (e) => {
+    let value = e.target.value.toUpperCase().replace(/\W/g, ''); // Remove non-alphanumeric and convert to uppercase
+    if (isNaN(value.charAt(0))) {
+      value = value.replace(/(\w\w\w)(\w\w\w)?/, '$1-$2').trim(); // Format as XXX-XXX
+    }
+    formik.setFieldValue('shippingPostalCode', value);
+  };
+
+  const placeOrderHandler = async () => {
+    try {
+      const orderItems = cart.cartItems.map((item) => ({
+        qty: item.qty,
+        product: item.product._id,
+      }));
+
+      const user = id;
+      const address = formik.values.shippingAddress;
+      const city = formik.values.shippingCity;
+      const postalCode = formik.values.shippingPostalCode;
+      const state = formik.values.shippingState;
+      const country = formik.values.shippingCountry;
+      const phoneNumber = formik.values.billingPhone;
+
+      const res = await createOrder({
+        orderItems,
+        shippingAddress1: address,
+        city: city,
+        postalCode: postalCode,
+        state: state,
+        country: country,
+        user,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        paymentMethod: cart.paymentMethod,
+        phoneNumber: phoneNumber,
+        taxPrice: cart.taxPrice,
+      }).unwrap();
+      dispatch(clearCartItems());
+      navigate(`/order/${res.id}`);
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
-      billingName: '',
-      billingEmail: '',
+      billingName: name || '',
+      billingEmail: email || '',
       billingPhone: '',
       shippingAddress: '',
-      shippingZipCode: '',
+      shippingPostalCode: '',
       shippingCity: '',
       shippingState: '',
       shippingCountry: '',
-      paymentMethod: '',
+      paymentMethod: 'PayPal',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-      // Handle form submission
+      placeOrderHandler();
     },
   });
 
-  const renderInput = (name, placeholder, type = 'text') => (
+  useEffect(() => {
+    if (
+      formik.values.shippingAddress &&
+      formik.values.shippingPostalCode &&
+      formik.values.shippingCity &&
+      formik.values.shippingState &&
+      formik.values.shippingCountry
+    ) {
+      dispatch(
+        saveShippingAddress({
+          address: formik.values.shippingAddress,
+          postalCode: formik.values.shippingPostalCode,
+          city: formik.values.shippingCity,
+          state: formik.values.shippingState,
+          country: formik.values.shippingCountry,
+        })
+      );
+    }
+
+    if (formik.values.paymentMethod) {
+      dispatch(savePaymentMethod(formik.values.paymentMethod));
+    }
+  }, [formik.values, dispatch]);
+
+  const renderInput = (name, placeholder, type = 'text', onChange) => (
     <>
       <Form.Control
         type={type}
@@ -53,6 +159,7 @@ export const Checkout = () => {
           formik.touched[name] && formik.errors[name] ? 'is-invalid' : ''
         }`}
         {...formik.getFieldProps(name)}
+        onChange={onChange || formik.handleChange}
       />
       {formik.touched[name] && formik.errors[name] && (
         <div className="text-danger">{formik.errors[name]}</div>
@@ -100,7 +207,12 @@ export const Checkout = () => {
                     <Form.Label className="checkout__label">
                       Phone Number
                     </Form.Label>
-                    {renderInput('billingPhone', '123-456-7890', 'tel')}
+                    {renderInput(
+                      'billingPhone',
+                      formik.values.billingPhone || '123-456-7890',
+                      'tel',
+                      handlePhoneChange
+                    )}
                   </Form.Group>
                 </Col>
                 <Col></Col>
@@ -114,11 +226,16 @@ export const Checkout = () => {
               </Form.Group>
               <Row>
                 <Col>
-                  <Form.Group controlId="shippingZipCode">
+                  <Form.Group controlId="shippingPostalCode">
                     <Form.Label className="checkout__label">
-                      Zip Code
+                      Postal Code / Zip Code
                     </Form.Label>
-                    {renderInput('shippingZipCode', '12345')}
+                    {renderInput(
+                      'shippingPostalCode',
+                      formik.values.shippingPostalCode || '',
+                      'text',
+                      handlePostalCodeChange
+                    )}
                   </Form.Group>
                 </Col>
                 <Col>
@@ -131,7 +248,9 @@ export const Checkout = () => {
               <Row>
                 <Col>
                   <Form.Group controlId="shippingCountry">
-                    <Form.Label className="checkout__label">State</Form.Label>
+                    <Form.Label className="checkout__label">
+                      Province / State
+                    </Form.Label>
                     {renderInput('shippingState', 'Texas')}
                   </Form.Group>
                 </Col>
@@ -156,7 +275,7 @@ export const Checkout = () => {
                       label="Paypal"
                       name="paymentMethod"
                       value="Paypal"
-                      checked={formik.values.paymentMethod === 'Paypal'}
+                      checked={formik.values.paymentMethod === 'PayPal'}
                       onChange={formik.handleChange}
                       className="checkout__input"
                       style={{ cursor: 'pointer' }}
@@ -169,7 +288,7 @@ export const Checkout = () => {
                       name="paymentMethod"
                       value="Credit Card"
                       className="checkout__input"
-                      checked={formik.values.paymentMethod === 'Credit Card'}
+                      checked={formik.values.paymentMethod === 'CreditCard'}
                       onChange={formik.handleChange}
                       style={{ cursor: 'pointer' }}
                     />
@@ -248,7 +367,13 @@ export const Checkout = () => {
             </Row>
 
             <div className="checkout__btn-row">
-              <Button className="third-button">Continue & Pay</Button>
+              <Button
+                className="third-button"
+                type="submit"
+                disabled={cart.cartItems === 0}
+              >
+                Continue & Pay
+              </Button>
             </div>
           </Col>
         </Row>

@@ -15,7 +15,7 @@
   @include thin-font;
 
   @include desktop {
-    margin: 0 3rem;
+    // margin: 0 3rem;
   }
 
   table img {
@@ -25,4 +25,8 @@
 
 body {
   background-color: $white;
+}
+
+.container {
+  --bs-gutter-x: 0rem;
 }

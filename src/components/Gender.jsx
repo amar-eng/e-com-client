@@ -8,6 +8,7 @@ export const Gender = ({ gender }) => {
       <img
         src={gender === 'male' ? man : gender === 'female' ? woman : unisex}
         className="gender__icon"
+        alt="gender"
       />
     </Col>
   );

@@ -1,4 +1,4 @@
-import { scent4, scent2, scent3 } from './lists';
+import { scent4, scent2, scent3, aeru } from './lists';
 
 export const stepsData = [
   {
@@ -20,6 +20,6 @@ export const stepsData = [
     title: 'Recieve your fragrance',
     description:
       'Your fragrance arrives in a complimentary atomizer case. Each 5 mL bottle contains about 100 sprays, ensuring it lasts until your next delivery.',
-    imageUrl: scent4, // Replace with the path to your image
+    imageUrl: aeru, // Replace with the path to your image
   },
 ];

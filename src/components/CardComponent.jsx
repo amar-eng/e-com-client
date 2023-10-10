@@ -3,7 +3,6 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Col, Button, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Rating } from './Rating';
 
 export const CardComponent = ({
   image,

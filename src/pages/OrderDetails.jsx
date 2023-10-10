@@ -123,19 +123,21 @@ export const OrderDetails = () => {
     <Message variant="danger">{isError.error}</Message>
   ) : (
     <>
-      <h1>Order: {order.id}</h1>
-      <Row>
-        <Col md={8}>
+      <h1 className="checkout__header" style={{ margin: '1rem' }}>
+        Order: {order.id}
+      </h1>
+      <Row className="mx-1 d-flex justify-content-space-between">
+        <Col md={6}>
           <ListGroup className="custom-list-group" variant="flush">
             <ListGroup.Item>
-              <h3>Shipping Details</h3>
-              <p>
+              <h3 className="checkout__header">Shipping Details</h3>
+              <p className="checkout__price">
                 <span>Name:</span> {order.user.name}
               </p>
-              <p>
+              <p className="checkout__price">
                 <span>Email:</span> {order.user.email}
               </p>
-              <p>
+              <p className="checkout__price">
                 <span>Address:</span> {order.shippingAddress1}, {order.city}{' '}
                 {order.state}, {order.country}, {order.postalCode}
               </p>
@@ -149,8 +151,8 @@ export const OrderDetails = () => {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h3>Payment Method</h3>
-              <p>
+              <h3 className="checkout__header">Payment Method</h3>
+              <p className="checkout__price">
                 <span>Method:</span> {order.paymentMethod}
               </p>
 
@@ -163,16 +165,16 @@ export const OrderDetails = () => {
               )}
             </ListGroup.Item>
 
-            <ListGroup.Item>
-              <h3>Order Items</h3>
+            <div>
+              <h3 className="checkout__header">Order Items</h3>
               {order.orderItems.length === 0 ? (
                 <Message>Order is empty</Message>
               ) : (
                 order.orderItems.map((item, index) => {
                   return (
                     <ListGroup.Item key={index}>
-                      <Row className="d-flex align-items-center">
-                        <Col md={1} className="p-1">
+                      <Row className="d-flex align-items-center justify-content-center">
+                        <Col xs={2}>
                           <Image
                             src={item.product.image}
                             alt={item.product.name}
@@ -182,49 +184,57 @@ export const OrderDetails = () => {
                         </Col>
                         <Col>
                           <Link to={`/explore-scents/${item.product._id}`}>
-                            <p>{item.product.name}</p>
+                            <p className="checkout__price">
+                              {item.product.name}
+                            </p>
                           </Link>
                         </Col>
-                        <Col md={4}>
-                          {item.qty} x ${item.product.price} = $
-                          {item.qty * item.product.price}
+                        <Col>
+                          <div className="checkout__price">
+                            {item.qty} x ${item.product.price} =
+                            <span className="checkout__amount--orange">
+                              ${item.qty * item.product.price}
+                            </span>
+                          </div>
                         </Col>
                       </Row>
                     </ListGroup.Item>
                   );
                 })
               )}
-            </ListGroup.Item>
+            </div>
           </ListGroup>
         </Col>
-        <Col md={4}>
-          <Card>
+        <Col md={3}>
+          <Card className="p-3">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2 className="checkout__header">Order Summary</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col className="checkout__price">Items</Col>
+                  <Col className="checkout__price">${order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col className="checkout__price">Shipping</Col>
+                  <Col className="checkout__price">${order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col className="checkout__price">Tax</Col>
+                  <Col className="checkout__price">${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Total</Col>
-                  <Col>${order.totalPrice.toFixed(2)}</Col>
+                  <Col className="checkout__price">Total</Col>
+                  <Col className="checkout__amount--orange">
+                    ${order.totalPrice.toFixed(2)}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
@@ -235,7 +245,12 @@ export const OrderDetails = () => {
                     <Loader />
                   ) : (
                     <div>
-                      <Button onClick={onApproveTest}>Test Pay Order</Button>
+                      <Button
+                        onClick={onApproveTest}
+                        className="third-button my-3"
+                      >
+                        Test Pay Order
+                      </Button>
                       <div>
                         <PayPalButtons
                           createOrder={createOrder}

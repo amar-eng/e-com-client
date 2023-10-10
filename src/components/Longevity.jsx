@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 const colors = [null, '#8B0000', '#FF8C00', '#FFD700', '#9ACD32', '#006400'];
 

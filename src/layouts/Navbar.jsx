@@ -43,7 +43,7 @@ export const AppNavbar = () => {
         <Row className="navbar-row">
           <LinkContainer to="/">
             <Col className="navbar-item" md={9}>
-              <div className="navbar-logo">El-Misk</div>
+              <div className="navbar-logo">AERU</div>
             </Col>
           </LinkContainer>
 

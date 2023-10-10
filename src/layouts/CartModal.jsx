@@ -19,7 +19,7 @@ export const CartModal = ({ showModal, handleCloseModal }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Cart />
+        <Cart handleCloseModal={handleCloseModal} />
       </Modal.Body>
     </Modal>
   );

@@ -10,7 +10,7 @@ const initialState = localStorage.getItem('cart')
       taxPrice: 0,
       totalPrice: 0,
       shippingAddress: {},
-      paymentMethod: 'Paypal',
+      paymentMethod: '',
     };
 
 const cartSlice = createSlice({

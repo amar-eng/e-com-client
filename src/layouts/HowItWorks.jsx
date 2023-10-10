@@ -11,7 +11,11 @@ export const HowItWorks = () => {
         {stepsData.map((step) => (
           <Col md={4} key={step.number} className="step-col">
             <div className="step-number">{step.number}</div>
-            <img src={step.imageUrl} alt={`Step ${step.number}`} />
+            <img
+              src={step.imageUrl}
+              alt={`Step ${step.number}`}
+              className="step__img"
+            />
             <h3 className="step-col__header">{step.title}</h3>
             <p className="step-col__p">{step.description}</p>
           </Col>
