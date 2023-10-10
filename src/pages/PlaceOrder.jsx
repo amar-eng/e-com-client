@@ -25,7 +25,7 @@ export const PlaceOrder = () => {
   const paymentMethod = usePaymentMethod();
   const cartItems = useCartItems();
   const cart = useCart();
-  const { token, id } = useUserInfo();
+  const { id } = useUserInfo();
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 

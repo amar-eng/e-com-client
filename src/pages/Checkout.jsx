@@ -20,6 +20,7 @@ export const Checkout = () => {
     shippingAddress: Yup.string().required('Address is required'),
     shippingZipCode: Yup.string().required('Zip Code is required'),
     shippingCity: Yup.string().required('City is required'),
+    shippingState: Yup.string().required('State is required'),
     shippingCountry: Yup.string().required('Country is required'),
     paymentMethod: Yup.string().required('Payment method is required'),
   });
@@ -32,6 +33,7 @@ export const Checkout = () => {
       shippingAddress: '',
       shippingZipCode: '',
       shippingCity: '',
+      shippingState: '',
       shippingCountry: '',
       paymentMethod: '',
     },
@@ -64,11 +66,12 @@ export const Checkout = () => {
           lastProductId ? `/explore-scents/${lastProductId}` : `/explore-scents`
         }
       />
-      <Row className="checkout">
-        <Col md={7} className="checkout__col ">
-          <div>
-            <h1>Checkout</h1>
-            <Form onSubmit={formik.handleSubmit}>
+      <Form onSubmit={formik.handleSubmit}>
+        <Row className="checkout">
+          <Col xs={11} md={7} className="checkout__col ">
+            <div>
+              <h1>Checkout</h1>
+
               {/* Billing Details */}
               <h4 className="checkout__header">Billing Details</h4>
               <Row>
@@ -121,13 +124,21 @@ export const Checkout = () => {
                 <Col>
                   <Form.Group controlId="shippingCity">
                     <Form.Label className="checkout__label">City</Form.Label>
-                    {renderInput('shippingCity', 'CityName')}
+                    {renderInput('shippingCity', 'Dallas')}
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="shippingCountry">
+                    <Form.Label className="checkout__label">State</Form.Label>
+                    {renderInput('shippingState', 'Texas')}
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group controlId="shippingCountry">
                     <Form.Label className="checkout__label">Country</Form.Label>
-                    {renderInput('shippingCountry', 'CountryName')}
+                    {renderInput('shippingCountry', 'USA')}
                   </Form.Group>
                 </Col>
               </Row>
@@ -165,83 +176,83 @@ export const Checkout = () => {
                   </Col>
                 </Row>
               </Form.Group>
-            </Form>
-          </div>
-        </Col>
-        <Col md={4} className="checkout__col checkout__col-2">
-          <h4 className="checkout__header checkout__header--summary">
-            Summary
-          </h4>
-          {cartItems &&
-            cartItems.map((item) => {
-              return (
-                <ListGroup.Item
-                  key={item.product._id}
-                  className="checkout__listgroup"
-                >
-                  <Row className="checkout__rowItem">
-                    <Col md={2}>
-                      <Link to={`/explore-scents/${item.product._id}`}>
-                        <Image
-                          src={item.product.image}
-                          alt={item.product.name}
-                          fluid
-                          rounded
-                        />
-                      </Link>
-                    </Col>
+            </div>
+          </Col>
+          <Col xs={11} md={4} className="checkout__col checkout__col-2">
+            <h4 className="checkout__header checkout__header--summary">
+              Summary
+            </h4>
+            {cartItems &&
+              cartItems.map((item) => {
+                return (
+                  <ListGroup.Item
+                    key={item.product._id}
+                    className="checkout__listgroup"
+                  >
+                    <Row className="checkout__rowItem">
+                      <Col sm={4} xs={3} md={4} lg={2}>
+                        <Link to={`/explore-scents/${item.product._id}`}>
+                          <Image
+                            src={item.product.image}
+                            alt={item.product.name}
+                            fluid
+                            rounded
+                          />
+                        </Link>
+                      </Col>
 
-                    <Col md={8}>
-                      <Row className="cart__name">{item.product.name}</Row>
-                      <Row className="cart__price">${item.product.price}</Row>
-                    </Col>
+                      <Col sm={5} xs={4} md={4} lg={7}>
+                        <Row className="cart__name">{item.product.name}</Row>
+                        <Row className="cart__price">${item.product.price}</Row>
+                      </Col>
 
-                    <Col>x{item.qty}</Col>
-                  </Row>
-                </ListGroup.Item>
-              );
-            })}
+                      <Col>x{item.qty}</Col>
+                    </Row>
+                  </ListGroup.Item>
+                );
+              })}
 
-          <Row className="mt-4">
-            <Col md={9}>
-              <p className="checkout__price">Price</p>
-            </Col>
-            <Col>
-              <p className="checkout__amount">${itemsPrice}</p>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={9}>
-              <p className="checkout__price">Shipping</p>
-            </Col>
-            <Col>
-              <p className="checkout__amount">${shippingPrice}</p>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={9}>
-              <p className="checkout__price">Tax</p>
-            </Col>
-            <Col>
-              <p className="checkout__amount">${taxPrice}</p>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col md={9}>
-              <p className="checkout__price">Grand Total</p>
-            </Col>
-            <Col>
-              <p className="checkout__amount checkout__amount--orange">
-                ${totalPrice}
-              </p>
-            </Col>
-          </Row>
+            <Row className="mt-4">
+              <Col xs={9} md={9}>
+                <p className="checkout__price">Price</p>
+              </Col>
+              <Col>
+                <p className="checkout__amount">${itemsPrice}</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={9} md={9}>
+                <p className="checkout__price">Shipping</p>
+              </Col>
+              <Col>
+                <p className="checkout__amount">${shippingPrice}</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={9} md={9}>
+                <p className="checkout__price">Tax</p>
+              </Col>
+              <Col>
+                <p className="checkout__amount">${taxPrice}</p>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col xs={9} md={9}>
+                <p className="checkout__price">Grand Total</p>
+              </Col>
+              <Col>
+                <p className="checkout__amount checkout__amount--orange">
+                  ${totalPrice}
+                </p>
+              </Col>
+            </Row>
 
-          <div className="checkout__btn-row">
-            <Button className="third-button">Continue & Pay</Button>
-          </div>
-        </Col>
-      </Row>
+            <div className="checkout__btn-row">
+              <Button className="third-button">Continue & Pay</Button>
+            </div>
+          </Col>
+        </Row>
+      </Form>
     </>
   );
 };
