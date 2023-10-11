@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
-export const SearchBox = () => {
+export const SearchBox = ({ reset }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,7 +13,7 @@ export const SearchBox = () => {
     e.preventDefault();
     if (keyword) {
       if (location.pathname.includes('explore-scents')) {
-        navigate(`search/${keyword.trim()}`);
+        navigate(`/explore-scents/search/${keyword.trim()}`);
       } else {
         navigate(`explore-scents/search/${keyword.trim()}`);
       }
@@ -21,7 +21,15 @@ export const SearchBox = () => {
     } else {
       navigate('/explore-scents');
     }
+
+    setKeyword('');
   };
+
+  useEffect(() => {
+    if (reset) {
+      setKeyword('');
+    }
+  }, [reset]);
   return (
     <Form onSubmit={submitHandler} className="searchbox">
       <Form.Control

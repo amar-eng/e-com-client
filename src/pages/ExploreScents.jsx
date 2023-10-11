@@ -2,13 +2,13 @@ import { Row, Col, Form } from 'react-bootstrap';
 import { useGetProductsQuery } from '../services/slices/productsApiSlice';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Paginate } from '../components/Paginate';
 import { Banner } from '../components/Banner';
 import { exploreData } from '../utils/heroData';
 import { SearchBox } from '../components/Searchbox';
 import { SectionHeader } from '../components/SectionHeaders';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardComponent } from '../components/CardComponent';
 
 export const ExploreScents = () => {
@@ -18,15 +18,29 @@ export const ExploreScents = () => {
     pageNumber,
   });
 
+  const navigate = useNavigate();
+
   const [occasionFilter, setOccasionFilter] = useState('');
   const [concentrationFilter, setConcentrationFilter] = useState('');
   const [seasonFilter, setSeasonFilter] = useState('');
+  const [resetSearch, setResetSearch] = useState(false);
 
   const resetFilters = () => {
     setOccasionFilter('');
     setConcentrationFilter('');
     setSeasonFilter('');
+    setResetSearch(true);
+
+    navigate('/explore-scents');
   };
+
+  useEffect(() => {
+    if (resetSearch) {
+      setResetSearch(false);
+    }
+  }, [resetSearch]);
+
+  console.log(data);
   return (
     <>
       {isLoading ? (
@@ -40,7 +54,7 @@ export const ExploreScents = () => {
           <Banner {...exploreData} />
 
           <div className="search-box-wrapper">
-            <SearchBox />
+            <SearchBox reset={resetSearch} />
           </div>
           <div className="filter-wrapper">
             <Row className="w-50 align-items-center">
@@ -119,7 +133,10 @@ export const ExploreScents = () => {
                   })
                   .map((product) => (
                     <Col
-                      md={3}
+                      sm={6}
+                      md={6}
+                      lg={4}
+                      xl={3}
                       key={product.id}
                       className="d-flex align-item-center justify-content-center"
                     >

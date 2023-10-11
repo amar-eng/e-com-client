@@ -39,13 +39,13 @@ export const CardComponent = ({
       ></div>
       <div className="cardComp__container">
         <Row className="cardComp__container-content align-items-center my-2">
-          <Col className="cardComp__container-first" lg={2}>
-            <Season season={season} width="490%" />
+          <Col className="cardComp__container-first" xs={3} lg={2}>
+            <Season season={season} width="20px" />
           </Col>
-          <Col className="cardComp__container-first" lg={3}>
-            <Gender gender={gender} width="340%" />
+          <Col className="cardComp__container-first" xs={3} lg={3}>
+            <Gender gender={gender} width="30px" />
           </Col>
-          <Col className="cardComp__concentration" lg={5}>
+          <Col className="cardComp__concentration" xs={5} lg={5}>
             {concentration}
           </Col>
         </Row>

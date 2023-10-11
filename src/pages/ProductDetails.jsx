@@ -187,8 +187,8 @@ export const ProductDetails = () => {
           </Col>
 
           <Row className="mb-3">
-            <Gender {...scent} width="70%" />
-            <Season {...scent} width="70%" />
+            <Gender {...scent} width="30px" />
+            <Season {...scent} width="30px" />
           </Row>
 
           <Col>
