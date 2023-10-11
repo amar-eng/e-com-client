@@ -1,5 +1,5 @@
-// export const BASE_URL = 'http://localhost:5001';
-export const BASE_URL = 'https://e-com-server-jt2k.vercel.app';
+export const BASE_URL = 'http://localhost:5001';
+// export const BASE_URL = 'https://e-com-server-jt2k.vercel.app';
 export const PRODUCTS_URL = `${BASE_URL}/api/products`;
 export const USERS_URL = `${BASE_URL}/api/users`;
 export const ORDERS_URL = `${BASE_URL}/api/orders`;

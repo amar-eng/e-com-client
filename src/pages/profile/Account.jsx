@@ -12,11 +12,6 @@ export const Account = () => {
 
   const { data: userOrders } = useGetMyOrdersQuery(userInfo.id);
 
-  // useEffect(() => {
-  //   setName(userInfo.name);
-  //   setEmail(userInfo.email);
-  // }, [userInfo.email, userInfo.name]);
-
   return (
     <>
       <ProfileHeader headerText="My Account" />

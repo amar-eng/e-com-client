@@ -125,9 +125,14 @@ export const ProductDetails = () => {
     <>
       <GoBack to="/explore-scents" />
 
-      <Row className="scent align-items-center ">
-        <Col md={4}>
-          <img src={scent.image} alt={scent.name} className="scent__img" />
+      <Row className="scent align-items-center mx-2 ">
+        <Col md={3}>
+          <div
+            className="scent-img__container"
+            style={{ backgroundImage: `url(${scent.image})` }}
+          >
+            {/* <img src={scent.image} alt={scent.name} className="scent__img" /> */}
+          </div>
         </Col>
         <Col md={8}>
           <Col className="scent__featured">Best for {scent.occasion}</Col>
@@ -172,7 +177,7 @@ export const ProductDetails = () => {
         </Col>
       </Row>
 
-      <Row className="mt-5 mb-5">
+      <Row className="mt-5 mb-5 mx-2">
         <Col md={7}>
           <Notes {...scent} />
         </Col>
@@ -182,8 +187,8 @@ export const ProductDetails = () => {
           </Col>
 
           <Row className="mb-3">
-            <Gender {...scent} />
-            <Season {...scent} />
+            <Gender {...scent} width="70%" />
+            <Season {...scent} width="70%" />
           </Row>
 
           <Col>
@@ -191,7 +196,7 @@ export const ProductDetails = () => {
           </Col>
         </Col>
       </Row>
-      <Row className="d-flex align-items-center ">
+      <Row className="d-flex align-items-center mx-4">
         <Col md={4}>
           <h4>Tried {scent.name} before?</h4>
           {loadingProductreview && <Loader />}
@@ -238,7 +243,7 @@ export const ProductDetails = () => {
         Customer Reviews
       </h1>
 
-      <Row>
+      <Row className="mx-2">
         {scent.reviews.length === 0 && (
           <Col md={12}>
             <Message>No Reviews</Message>

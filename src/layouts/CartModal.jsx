@@ -14,7 +14,7 @@ export const CartModal = ({ showModal, handleCloseModal }) => {
       backdrop="static"
     >
       <Modal.Header closeButton>
-        <Modal.Title>
+        <Modal.Title className="cart__header-modal">
           Your Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
         </Modal.Title>
       </Modal.Header>

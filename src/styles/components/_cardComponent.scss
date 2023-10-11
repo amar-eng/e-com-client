@@ -1,11 +1,15 @@
 .cardComp {
   width: 80%;
-  height: 50vh;
   margin: 1rem;
   padding: 0.5rem;
 
   &:hover {
     border: 1px solid $gold;
+  }
+
+  &__concentration {
+    @include fontSizeAndColor(14px, $navy-blue);
+    @include outfit-light;
   }
 
   &__like {
@@ -14,8 +18,14 @@
   }
 
   &__img-container {
-    background-color: $white;
+    background-color: #f1f1f1;
     height: 250px;
+    width: 100%;
+    background-color: #f1f1f1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
   }
 
   &__img {
@@ -31,7 +41,8 @@
     }
 
     &-first {
-      @include fontSizeAndColor(14px, $black);
+      @include fontSizeAndColor(14px, $navy-blue);
+      @include outfit-light;
     }
   }
 }

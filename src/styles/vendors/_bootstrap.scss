@@ -57,6 +57,15 @@ Link {
   @include fontSizeAndColor(15px, white);
   text-transform: uppercase;
   @include outfit-light;
+
+  &-alt {
+    background-color: $gold !important;
+    border: 1px solid $gold !important;
+    @include fontSizeAndColor(14px, $navy-blue);
+    color: $navy-blue !important;
+    text-transform: uppercase;
+    @include outfit-light;
+  }
 }
 
 .container {

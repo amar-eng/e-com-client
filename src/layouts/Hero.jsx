@@ -22,7 +22,7 @@ export const Hero = () => {
         <Row className="hero__buttons">
           <LinkContainer to="/explore-scents">
             <Col>
-              <Buttons text="Expolore Scents " />
+              <Buttons text="Explore Scents " />
             </Col>
           </LinkContainer>
         </Row>

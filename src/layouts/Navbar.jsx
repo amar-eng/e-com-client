@@ -1,7 +1,7 @@
 import { Navbar, Col, Row, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useCartItems } from '../hooks/useCartInfo';
-import { user, shoppingBag } from '../utils/lists';
+import { user } from '../utils/lists';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { useLogoutMutation } from '../services/slices/usersApiSlice';
 import { logout } from '../services/slices/authSlice';
@@ -40,70 +40,101 @@ export const AppNavbar = () => {
   return (
     <div className="navbar-container">
       <Navbar className="custom-navbar">
-        <Row className="navbar-row">
-          <LinkContainer to="/">
-            <Col className="navbar-item" md={9}>
+        <Row className="navbar-row ">
+          <Col className="navbar-item" xs={4} sm={7} md={7} lg={8} xl={9}>
+            <LinkContainer to="/">
               <div className="navbar-logo">AERU</div>
-            </Col>
-          </LinkContainer>
-
-          <LinkContainer to="/login">
-            <Col xs="auto" className="navbar-item">
+            </LinkContainer>
+          </Col>
+          <Col
+            xs={1}
+            sm={1}
+            md={1}
+            lg={1}
+            xl={1}
+            className="navbar-item"
+            onClick={openCartModal}
+          >
+            {cartItems.length > 0 && (
+              <div className="navbar-item-container">
+                <p className="nav-number">
+                  {cartItems.reduce((a, c) => a + c.qty, 0)}
+                </p>
+              </div>
+            )}
+          </Col>
+          <Col xs={7} sm={4} md={4} lg={3} xl={2} className="navbar-item">
+            <LinkContainer to="/login">
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img
-                  src={user}
-                  style={{
-                    width: '25px',
-                    margin: '0 0.5rem',
-                  }}
-                />
-                {userInfo && (
-                  <NavDropdown title={userInfo.name} id="username">
-                    <LinkContainer to="/my-account">
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                {!userInfo && (
+                  <img
+                    src={user}
+                    style={{
+                      width: '25px',
+                    }}
+                  />
                 )}
 
-                {userInfo && userInfo.isAdmin && (
-                  <NavDropdown title="Admin" id="adminMenu">
-                    <LinkContainer to="/admin/productlist">
-                      <NavDropdown.Item>Products</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/orderlist">
-                      <NavDropdown.Item>Orders</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/userlist">
-                      <NavDropdown.Item>Users</NavDropdown.Item>
-                    </LinkContainer>
-                  </NavDropdown>
+                {userInfo && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <NavDropdown
+                      title={`Hi, ${userInfo.name}`}
+                      id="username"
+                      className="nav-dropdown-name"
+                    >
+                      <LinkContainer to="/my-account">
+                        <NavDropdown.Item className="nav-dropdown-name__item">
+                          Profile
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Item
+                        onClick={logoutHandler}
+                        className="nav-dropdown-name__item"
+                      >
+                        Logout
+                      </NavDropdown.Item>
+                    </NavDropdown>
+
+                    {userInfo.isAdmin && (
+                      <NavDropdown
+                        title="Admin"
+                        id="adminMenu"
+                        className="nav-dropdown-name nav-dropdown-admin"
+                      >
+                        <LinkContainer to="/admin/productlist">
+                          <NavDropdown.Item className="nav-dropdown-name__item">
+                            Products
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/orderlist">
+                          <NavDropdown.Item className="nav-dropdown-name__item">
+                            Orders
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/userlist">
+                          <NavDropdown.Item className="nav-dropdown-name__item">
+                            Users
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                      </NavDropdown>
+                    )}
+                  </div>
                 )}
               </div>
-            </Col>
-          </LinkContainer>
-
-          <Col xs="auto" className="navbar-item" onClick={openCartModal}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img
-                src={shoppingBag}
-                style={{
-                  width: '25px',
-                }}
-              />
-
-              {cartItems.length > 0 && (
-                <div className="cart-item-count">
-                  {cartItems.reduce((a, c) => a + c.qty, 0)}
-                </div>
-              )}
-            </div>
+            </LinkContainer>
           </Col>
         </Row>
       </Navbar>
-      <div className={`navbar-underline`} />
+      <div className="navbar-underline-container">
+        <div className={`navbar-underline`} />
+      </div>
+
       <CartModal showModal={showCartModal} handleCloseModal={closeCartModal} />
     </div>
   );

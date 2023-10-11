@@ -3,6 +3,9 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Col, Button, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Gender } from './Gender';
+import { Season } from './Season';
+import { Rating } from '@mui/material';
 
 export const CardComponent = ({
   image,
@@ -10,6 +13,7 @@ export const CardComponent = ({
   id,
   gender,
   season,
+  rating,
   concentration,
   occasion,
 }) => {
@@ -20,7 +24,7 @@ export const CardComponent = ({
   };
   return (
     <div className="cardComp">
-      <Row className="cardComp-heading d-flex align-items-center justify-content-center ">
+      <Row className="cardComp-heading d-flex align-items-center justify-content-center my-2">
         <Col className="cardComp__container-header" xs={9}>
           {name}
         </Col>
@@ -29,20 +33,29 @@ export const CardComponent = ({
         </Col>
       </Row>
 
-      <div className="cardComp__img-container">
-        <img src={image} alt={name} className="cardComp__img" />
-      </div>
+      <div
+        className="cardComp__img-container"
+        style={{ backgroundImage: `url(${image})` }}
+      ></div>
       <div className="cardComp__container">
-        <Row className="cardComp__container-content">
-          <Col className="cardComp__container-first">{season}</Col>
-          <Col className="cardComp__container-first">{gender}</Col>
+        <Row className="cardComp__container-content align-items-center my-2">
+          <Col className="cardComp__container-first" lg={2}>
+            <Season season={season} width="490%" />
+          </Col>
+          <Col className="cardComp__container-first" lg={3}>
+            <Gender gender={gender} width="340%" />
+          </Col>
+          <Col className="cardComp__concentration" lg={5}>
+            {concentration}
+          </Col>
         </Row>
-        <Col className="cardComp__container-first">{occasion}</Col>
+        <Rating value={rating} />
+        <Col className="cardComp__container-first my-2">
+          Best Occasion: {occasion}
+        </Col>
       </div>
       <LinkContainer to={`/explore-scents/${id}`}>
-        <Button variant="secondary" className="w-100">
-          Try It Out
-        </Button>
+        <Button className="w-100 my-1 third-button-alt">View details</Button>
       </LinkContainer>
     </div>
   );

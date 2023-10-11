@@ -2,7 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import { summer, spring, winter, fall } from '../utils/lists';
 
-export const Season = ({ season }) => {
+export const Season = ({ season, width }) => {
   return (
     <Col className="gender" md={2}>
       <img
@@ -15,7 +15,7 @@ export const Season = ({ season }) => {
             ? fall
             : winter
         }
-        className="gender__icon"
+        style={{ width: `${width}` }}
       />
     </Col>
   );

@@ -2,7 +2,6 @@
   position: relative;
 }
 .custom-navbar {
-  // background-color: $white;
   color: $black;
   padding: 1rem;
 }
@@ -13,7 +12,10 @@
   right: 0;
   height: 1px;
   background-color: $dark-grey;
-  margin: 0 1.5rem;
+  width: 100%;
+}
+.navbar-underline-container {
+  @include flex(center, center, row);
 }
 
 .responsive-navbar {
@@ -30,16 +32,50 @@
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 100;
-  margin-right: auto;
+  margin-right: 0;
 }
 .navbar-row {
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
 }
-.cart-badge {
-  position: absolute;
-  bottom: -5px;
-  right: -5px;
+
+.navbar-item-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../assets/icons/shopping-bag.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.nav-number {
+  margin: 0;
+  line-height: 0;
+  @include fontSizeAndColor(9px, $gold);
+  margin-top: 0.2rem;
+}
+
+.nav-dropdown-name {
+  @include fontSizeAndColor(13px, $gold);
+  @include tablet {
+    @include fontSizeAndColor(16px, $gold);
+  }
+
+  @include outfit-light;
+
+  &__item {
+    @include fontSizeAndColor(13px, $gold);
+    @include tablet {
+      @include fontSizeAndColor(16px, $gold);
+    }
+    @include outfit-light;
+  }
+}
+.nav-dropdown-admin {
+  margin-left: 1rem;
 }
