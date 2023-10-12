@@ -33,6 +33,10 @@
     @include bold-font;
   }
 
+  &__quantity-left {
+    @include fontSizeAndColor(15px, $red);
+    @include outfit-light;
+  }
   &__counter {
     width: 75%;
     margin: 1rem 1rem 1rem 1rem;
@@ -42,7 +46,7 @@
       width: 65%;
     }
     @include desktop {
-      width: 40%;
+      width: 30%;
     }
   }
 

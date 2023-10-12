@@ -122,7 +122,7 @@ export const ProductDetails = () => {
       <GoBack to="/explore-scents" />
 
       <Row className="scent align-items-center mx-2 ">
-        <Col md={5} lg={5}>
+        <Col md={5} lg={5} xl={4}>
           <div
             className="scent-img__container"
             style={{ backgroundImage: `url(${scent.image})` }}
@@ -139,6 +139,13 @@ export const ProductDetails = () => {
             <p className="scent__featured">{scent.concentration}</p>
           </Col>
           <Col className="scent__price">${scent.price}</Col>
+          <Col className="scent__quantity-left">
+            {scent.countInStock < 5 && (
+              <div>
+                Hurry, there's only <span>{scent.countInStock}</span> left!
+              </div>
+            )}
+          </Col>
           <Row className="scent__bottom">
             <div className="scent__counter">
               <Button

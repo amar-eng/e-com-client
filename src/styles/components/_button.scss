@@ -10,3 +10,8 @@
     transition: 3s smooth;
   }
 }
+.link-span {
+  @include fontSizeAndColor(13px, $blue);
+  @include outfit-light;
+  text-decoration: underline;
+}

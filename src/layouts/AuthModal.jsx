@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -20,15 +20,13 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
   const [login] = useLoginMutation();
   const [register] = useRegisterMutation();
 
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const redirect = searchParams.get('redirect') || '/';
+  const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      handleClose();
     }
-  }, [navigate, redirect, userInfo]);
+  }, [navigate, handleClose]);
 
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -74,7 +72,7 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
           toast.success('Logged in successfully');
           handleClose();
         } catch (error) {
-          toast.error(error?.data?.message || error.data);
+          setAuthError(error?.data?.message || error.data);
         }
       } else {
         if (values.password !== values.confirmPassword) {
@@ -91,7 +89,7 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
           toast.success('Registered successfully, please wait');
           handleClose();
         } catch (error) {
-          toast.error(error?.data?.message || error.data);
+          setAuthError(error?.data?.message || error.data);
         }
       }
     },
@@ -123,6 +121,7 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
       </Modal.Header>
       <Form onSubmit={formik.handleSubmit}>
         <Modal.Body>
+          {authError && <div className="text-danger mb-3">{authError}</div>}
           {authType === 'login' ? (
             <>
               <Form.Group controlId="email">
@@ -171,13 +170,19 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
               >
                 Sign in
               </Button>
-              <Link
-                variant="link"
-                className="small "
+              <span
+                role="button"
+                tabIndex="0"
+                className="small link-style link-span"
                 onClick={() => setAuthType('register')}
+                onKeyPress={(event) => {
+                  if (event.key === 'Enter') {
+                    setAuthType('register');
+                  }
+                }}
               >
                 New Customer? Register
-              </Link>
+              </span>
             </>
           ) : (
             <>
@@ -188,13 +193,19 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
               >
                 Register
               </Button>
-              <Link
-                variant="link"
-                className="small"
+              <span
+                role="button"
+                tabIndex="0"
+                className="small link-style link-span"
                 onClick={() => setAuthType('login')}
+                onKeyPress={(event) => {
+                  if (event.key === 'Enter') {
+                    setAuthType('login');
+                  }
+                }}
               >
                 Already have an account? Login
-              </Link>
+              </span>
             </>
           )}
         </Modal.Footer>
