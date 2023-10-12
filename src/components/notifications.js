@@ -2,29 +2,26 @@ import { toast } from 'react-toastify';
 
 export const notifySuccess = (message) => {
   toast.success(message, {
-    position: 'top-center',
     autoClose: 5000,
-    // icon: false,
-    style: { fontSize: '0.9em' },
+    icon: true,
     theme: 'colored',
+    progressClassName: 'toastify-progress-custom',
   });
 };
 
 export const notifyWarning = (message) => {
   toast.warn(message, {
-    position: 'top-center',
     autoClose: 5000,
-    icon: false,
+    icon: true,
     theme: 'colored',
-    style: { fontSize: '0.9em' },
+    // progressClassName: 'toastify-progress-custom',
   });
 };
 
 export const notifyError = (message) =>
   toast.error(message, {
-    position: 'top-center',
     autoClose: 5000,
-    icon: false,
-    style: { fontSize: '0.9em' },
+    icon: true,
     theme: 'colored',
+    // progressClassName: 'toastify-progress-custom',
   });

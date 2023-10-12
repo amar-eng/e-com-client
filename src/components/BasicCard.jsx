@@ -17,18 +17,18 @@ export const BasicCard = ({ name, occasion, rating, image, id }) => {
       <div onClick={toggleLike} className="custom-like">
         {liked ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
       </div>
-      <Card.Img variant="top" src={image} className="card-img" />
+      <Card.Img variant="top" src={image} className="card-img w-100" />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text>
-          {occasion}
-          <Row>
-            <Rating value={rating} />
-          </Row>
-        </Card.Text>
+        <Card.Text>{occasion}</Card.Text>
+        <Row>
+          <Rating value={rating} />
+        </Row>
 
         <LinkContainer to={`/explore-scents/${id}`}>
-          <Button variant="primary">Quick Shop</Button>
+          <Button variant="primary" className="my-3">
+            Quick Shop
+          </Button>
         </LinkContainer>
       </Card.Body>
     </Card>

@@ -1,7 +1,11 @@
 .works-row {
-  @include flex(center, center, row);
+  @include flex(center, center, column);
+  margin: 0 0.5rem;
+  @include desktop {
+    @include flex(center, center, row);
+    margin: 0 3rem;
+  }
 
-  margin: 0 3rem;
   text-align: center;
 }
 
@@ -17,10 +21,14 @@
   }
 
   &__p {
-    width: 85%;
-    @include fontSizeAndColor(14px, $black);
-    @include light-font;
-    height: 10vh;
+    @include fontSizeAndColor(16px, $black);
+    @include outfit-light;
+    margin-bottom: 2rem;
+    width: 100%;
+    @include desktop {
+      width: 85%;
+      height: 10vh;
+    }
   }
 }
 

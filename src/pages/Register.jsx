@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Form, Col, Row, Button } from 'react-bootstrap';
-import { FormContainer } from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../components/Loader';
 import { useRegisterMutation } from '../services/slices/usersApiSlice';
 import { setCredentials } from '../services/slices/authSlice';
 import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,8 +17,8 @@ export const Register = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const redirect = searchParams.get('redirect') || '/';
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get('redirect') || '/';
 
   useEffect(() => {
     if (userInfo) {
@@ -30,77 +26,97 @@ export const Register = () => {
     }
   }, [navigate, redirect, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const registerValidationSchema = Yup.object().shape({
+    name: Yup.string().required('Please enter your name'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Please enter a valid email'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters long')
+      .required('Please enter your password'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Please confirm your password'),
+  });
 
-    if (password !== confirmPassword) {
-      toast.error('Passwords dont match');
-      return;
-    } else {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: registerValidationSchema,
+    onSubmit: async (values) => {
       try {
-        const res = await register({ name, email, password }).unwrap();
+        const res = await register(values).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
         toast.success('Registered successfully, please wait');
       } catch (error) {
         toast.error(error?.data?.message || error.data);
       }
-    }
-  };
+    },
+  });
+
+  const renderInput = (name, placeholder, type = 'text') => (
+    <>
+      <Form.Control
+        type={type}
+        placeholder={placeholder}
+        className={`checkout__input ${
+          formik.touched[name] && formik.errors[name] ? 'is-invalid' : ''
+        }`}
+        {...formik.getFieldProps(name)}
+      />
+      {formik.touched[name] && formik.errors[name] && (
+        <div className="text-danger">{formik.errors[name]}</div>
+      )}
+    </>
+  );
+
   return (
-    <FormContainer>
-      <h1>Sign Up</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="name" className="my-3">
-          <Form.Control
-            type="text"
-            placeholder="Enter Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="email" className="my-3">
-          <Form.Control
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="password" className="my-3">
-          <Form.Control
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" className="my-3">
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Button
-          type="submit"
-          variant="warning"
-          className="mt-2"
-          disabled={isLoading}
-        >
-          Register{' '}
-        </Button>
-        {isLoading && <Loader />}
-      </Form>
-      <Row>
-        <Col>
-          Already have an account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-            Login
-          </Link>
+    <Row className="mx-5">
+      <h1 className="login_header">Register</h1>
+      <Row className="mx-5">
+        <Col xl={6}>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Group controlId="name" className="my-3 ">
+              {renderInput('name', 'Enter Name')}
+            </Form.Group>
+            <Form.Group controlId="email" className="my-3 ">
+              {renderInput('email', 'Enter Email', 'email')}
+            </Form.Group>
+            <Form.Group controlId="password" className="my-3 ">
+              {renderInput('password', 'Enter Password', 'password')}
+            </Form.Group>
+            <Form.Group controlId="confirmPassword" className="my-3 ">
+              {renderInput('confirmPassword', 'Confirm Password', 'password')}
+            </Form.Group>
+            <Button
+              type="submit"
+              variant="warning"
+              className="third-button my-2"
+              disabled={isLoading}
+            >
+              Register
+            </Button>
+            {isLoading && <Loader />}
+          </Form>
+          <Row>
+            <Col>
+              Already have an account?{' '}
+              <Link
+                className="small"
+                to={redirect ? `/login?redirect=${redirect}` : '/login'}
+              >
+                Login
+              </Link>
+            </Col>
+          </Row>
         </Col>
+        <Col xs={4} className="hero__image"></Col>
       </Row>
-    </FormContainer>
+    </Row>
   );
 };

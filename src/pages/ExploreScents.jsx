@@ -40,7 +40,6 @@ export const ExploreScents = () => {
     }
   }, [resetSearch]);
 
-  console.log(data);
   return (
     <>
       {isLoading ? (

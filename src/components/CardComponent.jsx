@@ -5,7 +5,7 @@ import { Col, Button, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Gender } from './Gender';
 import { Season } from './Season';
-import { Rating } from '@mui/material';
+import { Rating } from './Rating';
 
 export const CardComponent = ({
   image,
@@ -16,6 +16,7 @@ export const CardComponent = ({
   rating,
   concentration,
   occasion,
+  brand,
 }) => {
   const [liked, setLiked] = useState(false);
 
@@ -33,10 +34,13 @@ export const CardComponent = ({
         </Col>
       </Row>
 
-      <div
-        className="cardComp__img-container"
+      <LinkContainer
+        to={`/explore-scents/${id}`}
         style={{ backgroundImage: `url(${image})` }}
-      ></div>
+      >
+        <div className="cardComp__img-container"></div>
+      </LinkContainer>
+
       <div className="cardComp__container">
         <Row className="cardComp__container-content align-items-center my-2">
           <Col className="cardComp__container-first" xs={3} lg={2}>
@@ -53,6 +57,7 @@ export const CardComponent = ({
         <Col className="cardComp__container-first my-2">
           Best Occasion: {occasion}
         </Col>
+        <Col className="cardComp__brand my-2">{brand}</Col>
       </div>
       <LinkContainer to={`/explore-scents/${id}`}>
         <Button className="w-100 my-1 third-button-alt">View details</Button>

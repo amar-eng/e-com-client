@@ -5,3 +5,11 @@
   margin-top: 1rem;
   text-align: center;
 }
+
+.login_header {
+  @include fontSizeAndColor(28px, $orange);
+  @include outfit-Reg;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 2rem;
+}

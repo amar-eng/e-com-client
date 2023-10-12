@@ -9,7 +9,7 @@ export const HowItWorks = () => {
 
       <Row className="works-row">
         {stepsData.map((step) => (
-          <Col md={4} key={step.number} className="step-col">
+          <Col xs={12} md={8} lg={4} key={step.number} className="step-col">
             <div className="step-number">{step.number}</div>
             <img
               src={step.imageUrl}

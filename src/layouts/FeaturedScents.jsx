@@ -17,10 +17,10 @@ export const FeaturedScents = () => {
     data?.products?.filter((product) => product.isFeatured) || [];
 
   let itemsToShow;
-  if (windowWidth <= 576) {
+  if (windowWidth <= 770) {
     // mobile
     itemsToShow = 1;
-  } else if (windowWidth <= 992) {
+  } else if (windowWidth <= 1192) {
     // tablet
     itemsToShow = 2;
   } else {
@@ -52,10 +52,10 @@ export const FeaturedScents = () => {
         }
       >
         {productChunks.map((chunk, idx) => (
-          <Carousel.Item key={idx}>
+          <Carousel.Item key={idx} clas>
             <Row className="justify-content-center">
               {chunk.map((product) => (
-                <Col md={4} key={product._id}>
+                <Col md={5} lg={4} xl={3} key={product._id}>
                   <BasicCard
                     name={product.name}
                     occasion={product.occasion}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, ListGroup, Row, Image, Button, Form } from 'react-bootstrap';
 import { useCart, useCartItems } from '../hooks/useCartInfo';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ export const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [createOrder] = useCreateOrderMutation();
 
   const { id, name, email } = useUserInfo();
 
@@ -121,7 +121,6 @@ export const Checkout = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       placeOrderHandler();
     },
   });

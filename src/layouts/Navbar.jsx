@@ -10,9 +10,12 @@ import { toast } from 'react-toastify';
 import { notifySuccess } from '../components/notifications';
 import { CartModal } from './CartModal';
 import { useState } from 'react';
+import { AuthModal } from './AuthModal';
 
 export const AppNavbar = () => {
   const [showCartModal, setShowCartModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authType, setAuthType] = useState('login');
 
   const openCartModal = () => {
     setShowCartModal(true);
@@ -20,6 +23,14 @@ export const AppNavbar = () => {
 
   const closeCartModal = () => {
     setShowCartModal(false);
+  };
+
+  const openAuthModal = () => {
+    setShowAuthModal(true);
+  };
+
+  const closeAuthModal = () => {
+    setShowAuthModal(false);
   };
 
   const cartItems = useCartItems();
@@ -64,70 +75,77 @@ export const AppNavbar = () => {
             )}
           </Col>
           <Col xs={7} sm={4} md={4} lg={3} xl={2} className="navbar-item">
-            <LinkContainer to="/login">
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {!userInfo && (
-                  <img
-                    src={user}
-                    style={{
-                      width: '25px',
-                    }}
-                  />
-                )}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {!userInfo && (
+                <img
+                  src={user}
+                  style={{
+                    width: '25px',
+                    cursor: 'pointer',
+                  }}
+                  onClick={openAuthModal}
+                />
+              )}
 
-                {userInfo && (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
+              {userInfo && (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <NavDropdown
+                    title={`Hi, ${userInfo.name}`}
+                    id="username"
+                    className="nav-dropdown-name"
                   >
-                    <NavDropdown
-                      title={`Hi, ${userInfo.name}`}
-                      id="username"
-                      className="nav-dropdown-name"
+                    <LinkContainer to="/my-account">
+                      <NavDropdown.Item className="nav-dropdown-name__item">
+                        Profile
+                      </NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item
+                      onClick={logoutHandler}
+                      className="nav-dropdown-name__item"
                     >
-                      <LinkContainer to="/my-account">
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+
+                  {userInfo.isAdmin && (
+                    <NavDropdown
+                      title="Admin"
+                      id="adminMenu"
+                      className="nav-dropdown-name nav-dropdown-admin"
+                    >
+                      <LinkContainer to="/admin/productlist">
                         <NavDropdown.Item className="nav-dropdown-name__item">
-                          Profile
+                          Products
                         </NavDropdown.Item>
                       </LinkContainer>
-                      <NavDropdown.Item
-                        onClick={logoutHandler}
-                        className="nav-dropdown-name__item"
-                      >
-                        Logout
-                      </NavDropdown.Item>
+                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item className="nav-dropdown-name__item">
+                          Orders
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item className="nav-dropdown-name__item">
+                          Users
+                        </NavDropdown.Item>
+                      </LinkContainer>
                     </NavDropdown>
+                  )}
+                </div>
+              )}
+            </div>
 
-                    {userInfo.isAdmin && (
-                      <NavDropdown
-                        title="Admin"
-                        id="adminMenu"
-                        className="nav-dropdown-name nav-dropdown-admin"
-                      >
-                        <LinkContainer to="/admin/productlist">
-                          <NavDropdown.Item className="nav-dropdown-name__item">
-                            Products
-                          </NavDropdown.Item>
-                        </LinkContainer>
-                        <LinkContainer to="/admin/orderlist">
-                          <NavDropdown.Item className="nav-dropdown-name__item">
-                            Orders
-                          </NavDropdown.Item>
-                        </LinkContainer>
-                        <LinkContainer to="/admin/userlist">
-                          <NavDropdown.Item className="nav-dropdown-name__item">
-                            Users
-                          </NavDropdown.Item>
-                        </LinkContainer>
-                      </NavDropdown>
-                    )}
-                  </div>
-                )}
-              </div>
-            </LinkContainer>
+            <AuthModal
+              show={showAuthModal}
+              handleClose={closeAuthModal}
+              authType={authType}
+              setAuthType={setAuthType}
+            />
           </Col>
         </Row>
       </Navbar>

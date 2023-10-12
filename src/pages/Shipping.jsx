@@ -35,11 +35,9 @@ export const Shipping = () => {
 
   const cartItems = useCartItems();
   const lastProductId = cartItems[cartItems.length - 1]?.product?._id;
-  console.log(lastProductId);
 
   return (
     <FormContainer>
-      {/* <CheckoutSteps step1 step2 /> */}
       <GoBack
         to={
           lastProductId ? `/explore-scents/${lastProductId}` : `/explore-scents`

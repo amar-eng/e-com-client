@@ -20,6 +20,12 @@
     cursor: pointer3;
   }
 
+  &__brand {
+    @include fontSizeAndColor(14px, $orange);
+    @include bold-font;
+    text-transform: uppercase;
+  }
+
   &__img-container {
     background-color: #f1f1f1;
     height: 250px;
@@ -29,6 +35,7 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   &__img {

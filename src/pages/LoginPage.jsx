@@ -1,18 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Form, Col, Row, Button } from 'react-bootstrap';
-import { FormContainer } from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../components/Loader';
 import { useLoginMutation } from '../services/slices/usersApiSlice';
 import { setCredentials } from '../services/slices/authSlice';
 import { toast } from 'react-toastify';
 import { notifySuccess } from '../components/notifications';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,56 +27,82 @@ export const LoginPage = () => {
     }
   }, [navigate, redirect, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const loginValidationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Please enter a valid email'),
+    password: Yup.string().required('Please enter your password'),
+  });
 
-    try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate(redirect);
-      notifySuccess('Logged in successfully');
-    } catch (error) {
-      toast.error(error?.data?.message || error.data);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: async (values) => {
+      try {
+        const res = await login(values).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate(redirect);
+        notifySuccess('Logged in successfully');
+      } catch (error) {
+        toast.error(error?.data?.message || error.data);
+      }
+    },
+  });
+
+  const renderInput = (name, placeholder, type = 'text') => (
+    <>
+      <Form.Control
+        type={type}
+        placeholder={placeholder}
+        className={`checkout__input ${
+          formik.touched[name] && formik.errors[name] ? 'is-invalid' : ''
+        }`}
+        {...formik.getFieldProps(name)}
+      />
+      {formik.touched[name] && formik.errors[name] && (
+        <div className="text-danger">{formik.errors[name]}</div>
+      )}
+    </>
+  );
+
   return (
-    <FormContainer>
-      <h1>Login</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="email" className="my-3">
-          <Form.Control
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="password" className="my-3">
-          <Form.Control
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Button
-          type="submit"
-          variant="warning"
-          className="mt-2"
-          disabled={isLoading}
-        >
-          Sign In
-        </Button>
-        {isLoading && <Loader />}
-      </Form>
-      <Row>
-        <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-            Register
-          </Link>
+    <Row className="mx-5">
+      <h1 className="login_header">Login</h1>
+      <Row className="mx-5">
+        <Col xl={6}>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Group controlId="email" className="my-3 ">
+              {renderInput('email', 'Enter Email', 'email')}
+            </Form.Group>
+            <Form.Group controlId="password" className="my-3 ">
+              {renderInput('password', 'Enter Password', 'password')}
+            </Form.Group>
+            <Button
+              type="submit"
+              variant="warning"
+              className=" third-button my-2"
+              disabled={isLoading}
+            >
+              Sign In
+            </Button>
+            {isLoading && <Loader />}
+          </Form>
+          <Row>
+            <Col>
+              New Customer?{' '}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : '/register'}
+              >
+                Register
+              </Link>
+            </Col>
+          </Row>
         </Col>
+        <Col xs={4} className="hero__image"></Col>
       </Row>
-    </FormContainer>
+    </Row>
   );
 };

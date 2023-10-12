@@ -1,47 +1,56 @@
-import { useEffect, useState } from 'react';
-import { Table, Form, Button, Row, Col } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useEffect } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Message } from '../../components/Message';
 import { Loader } from '../../components/Loader';
 import { useProfileMutation } from '../../services/slices/usersApiSlice';
-import { useGetMyOrdersQuery } from '../../services/slices/ordersApiSlice';
 import { setCredentials } from '../../services/slices/authSlice';
-import { generateFormattedDate, maskedId } from '../../utils/common';
-import { x, check } from '../../utils/lists';
 import { ProfileHeader } from '../../components/ProfileHeader';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const Profile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
 
-  useEffect(() => {
-    setName(userInfo.name);
-    setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.name]);
+  const profileValidationSchema = Yup.object().shape({
+    name: Yup.string().required('Please enter your name'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Please enter a valid email'),
+    password: Yup.string().min(
+      8,
+      'Password must be at least 8 characters long'
+    ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Please confirm your password'),
+  });
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
-    } else {
+  const formik = useFormik({
+    initialValues: {
+      name: userInfo.name,
+      email: userInfo.email,
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: profileValidationSchema,
+    onSubmit: async (values) => {
+      if (values.password !== values.confirmPassword) {
+        toast.error('Passwords do not match');
+        return;
+      }
       try {
         const authToken = userInfo.token;
         const res = await updateProfile({
           data: {
             id: userInfo.id,
-            name,
-            email,
-            password,
+            name: values.name,
+            email: values.email,
+            password: values.password,
           },
           token: authToken,
         }).unwrap();
@@ -55,8 +64,24 @@ export const Profile = () => {
 
         toast.error(errorMessage);
       }
-    }
-  };
+    },
+  });
+
+  const renderInput = (name, placeholder, type = 'text') => (
+    <>
+      <Form.Control
+        type={type}
+        placeholder={placeholder}
+        className={`checkout__input ${
+          formik.touched[name] && formik.errors[name] ? 'is-invalid' : ''
+        }`}
+        {...formik.getFieldProps(name)}
+      />
+      {formik.touched[name] && formik.errors[name] && (
+        <div className="text-danger">{formik.errors[name]}</div>
+      )}
+    </>
+  );
 
   return (
     <Row className="d-flex justify-content-center align-items-center">
@@ -65,42 +90,22 @@ export const Profile = () => {
         <p style={{ textAlign: 'center' }}>
           Please review your information below and add any missing information.
         </p>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="my-2" controlId="name">
             <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
+            {renderInput('name', 'Enter Name')}
           </Form.Group>
           <Form.Group className="my-2" controlId="email">
             <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
+            {renderInput('email', 'Enter Email', 'email')}
           </Form.Group>
           <Form.Group className="my-2" controlId="password">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
+            {renderInput('password', 'Enter Password', 'password')}
           </Form.Group>
           <Form.Group className="my-2" controlId="confirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
+            {renderInput('confirmPassword', 'Confirm Password', 'password')}
           </Form.Group>
           <Button type="submit">Update Profile</Button>
 
