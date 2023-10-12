@@ -3,15 +3,15 @@
   color: $black;
   text-align: center;
   height: 60vh;
-  display: flex; /* make this a flex container */
-  align-items: stretch; /* ensure children stretch vertically */
+  display: flex;
+  align-items: stretch;
 }
 
 .hero__content {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertically center the content */
-  align-items: center; /* horizontally center the content */
+  justify-content: center;
+  align-items: center;
 }
 
 .hero__header {
@@ -19,12 +19,17 @@
   @include fontSizeAndColor($large-heading, $black);
   text-transform: capitalize;
   margin-bottom: 1rem;
+  margin-left: 1rem;
 
   &-paragraph {
-    @include fontSizeAndColor($small-heading, $black);
+    @include fontSizeAndColor(14px, $black);
     text-transform: none;
     @include antic;
     margin-bottom: 1rem;
+
+    @include tablet {
+      @include fontSizeAndColor($small-heading, $black);
+    }
   }
 }
 
@@ -38,7 +43,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  flex: 1; /* this will ensure it grows and takes up space */
+  flex: 1;
 }
 
 .hero__header-paragraph span {

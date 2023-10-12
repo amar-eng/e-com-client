@@ -56,8 +56,8 @@ export const ExploreScents = () => {
             <SearchBox reset={resetSearch} />
           </div>
           <div className="filter-wrapper">
-            <Row className="w-50 align-items-center">
-              <Col md={3}>
+            <Row className="align-items-center filter-row">
+              <Col xs={6} md={3} className="mb-3">
                 <Form.Control
                   as="select"
                   value={occasionFilter}
@@ -73,7 +73,7 @@ export const ExploreScents = () => {
                   <option value="Professional-Aura">Professional Aura</option>
                 </Form.Control>
               </Col>
-              <Col md={3}>
+              <Col xs={6} md={3} className="mb-3">
                 <Form.Control
                   as="select"
                   value={concentrationFilter}
@@ -87,7 +87,7 @@ export const ExploreScents = () => {
                   <option value="Parfum">Parfum</option>
                 </Form.Control>
               </Col>
-              <Col md={3}>
+              <Col xs={6} md={3} className="mb-3">
                 <Form.Control
                   as="select"
                   value={seasonFilter}
@@ -101,7 +101,7 @@ export const ExploreScents = () => {
                   <option value="winter">Winter</option>
                 </Form.Control>
               </Col>
-              <Col md={3}>
+              <Col xs={6} md={3} className="mb-3">
                 <div className="reset-btn" onClick={resetFilters}>
                   Clear Filters
                 </div>

@@ -49,7 +49,7 @@ export const CardComponent = ({
           <Col className="cardComp__container-first" xs={3} lg={3}>
             <Gender gender={gender} width="30px" />
           </Col>
-          <Col className="cardComp__concentration" xs={5} lg={5}>
+          <Col className="cardComp__concentration" xs={5} lg={6}>
             {concentration}
           </Col>
         </Row>

@@ -8,10 +8,10 @@ export const Longevity = ({ text, value }) => {
 
   return (
     <div className="longevity">
-      <Col md={2} className="longevity__p">
+      <Col md={3} lg={2} className="longevity__p">
         {text}
       </Col>
-      <Col md={3} className="longevity__container">
+      <Col xs={4} md={3} className="longevity__container">
         <div
           className="longevity__fill"
           style={{

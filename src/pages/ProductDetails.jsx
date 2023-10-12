@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Row, Col, Button, ListGroup, Form } from 'react-bootstrap';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
@@ -9,15 +9,11 @@ import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
 import { addToCart } from '../services/slices/cartSlice';
 import { useDispatch } from 'react-redux';
-import {
-  generateFormattedDate,
-  generateQuantitySelectOptions,
-} from '../utils/common';
+import { generateFormattedDate } from '../utils/common';
 import { toast } from 'react-toastify';
 import { useUserInfo } from '../hooks/useUserInfo';
 import { Rating } from '../components/Rating';
 import RatingSelector from '../components/RatingSelector';
-import { LinkContainer } from 'react-router-bootstrap';
 import { GoBack } from '../components/GoBack';
 import { ImageGallery } from '../components/ImageGallery';
 import { Notes } from '../components/Notes';
@@ -126,16 +122,16 @@ export const ProductDetails = () => {
       <GoBack to="/explore-scents" />
 
       <Row className="scent align-items-center mx-2 ">
-        <Col md={3}>
+        <Col md={5} lg={5}>
           <div
             className="scent-img__container"
             style={{ backgroundImage: `url(${scent.image})` }}
-          >
-            {/* <img src={scent.image} alt={scent.name} className="scent__img" /> */}
-          </div>
+          ></div>
         </Col>
-        <Col md={8}>
-          <Col className="scent__featured">Best for {scent.occasion}</Col>
+        <Col md={7}>
+          <Col className="scent__featured mt-2 mx-1">
+            Best for {scent.occasion}
+          </Col>
           <Col className="scent__name">{scent.name}</Col>
           <Col className="scent__desc">{scent.description}</Col>
 
@@ -148,7 +144,7 @@ export const ProductDetails = () => {
               <Button
                 onClick={decrementQty}
                 disabled={qty <= 1}
-                className="scent__btn"
+                className="scent__btn "
               >
                 -
               </Button>
@@ -182,7 +178,7 @@ export const ProductDetails = () => {
           <Notes {...scent} />
         </Col>
         <Col md={5}>
-          <Col className="mb-3">
+          <Col xs={12} className="mb-3">
             <Longevity text="Longevity" value={scent.longevity} />
           </Col>
 
@@ -213,6 +209,7 @@ export const ProductDetails = () => {
                   required
                   value={comment}
                   placeholder="Leave us with your thoughts"
+                  className="scent__textarea"
                   onChange={(e) => setComment(e.target.value)}
                 ></Form.Control>
                 <Button

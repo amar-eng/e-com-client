@@ -11,12 +11,27 @@
 
   &__header {
     @include outfit-light;
-    @include fontSizeAndColor(24px, $orange);
+    @include fontSizeAndColor(16px, $orange);
+    margin-bottom: 1rem;
     text-transform: uppercase;
+
+    @include tablet {
+      @include fontSizeAndColor(20px, $orange);
+    }
+    @include desktop {
+      @include fontSizeAndColor(24px, $orange);
+    }
   }
 
   &__p {
     @include outfit-light;
-    @include fontSizeAndColor(16px, $navy-blue);
+    @include fontSizeAndColor(13px, $navy-blue);
+
+    @include tablet {
+      @include fontSizeAndColor(14px, $navy-blue);
+    }
+    @include desktop {
+      @include fontSizeAndColor(16px, $navy-blue);
+    }
   }
 }

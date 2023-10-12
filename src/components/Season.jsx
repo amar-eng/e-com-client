@@ -4,7 +4,7 @@ import { summer, spring, winter, fall } from '../utils/lists';
 
 export const Season = ({ season, width }) => {
   return (
-    <Col className="gender" md={2}>
+    <Col className="gender" xs={3} md={2}>
       <img
         src={
           season === 'summer'

@@ -17,9 +17,16 @@
   }
 
   &__desc {
-    width: 70%;
+    width: 100%;
     @include fontSizeAndColor(16px, $navy-blue);
     margin: 1rem 0;
+
+    @include tablet {
+      width: 80%;
+    }
+    @include desktop {
+      width: 70%;
+    }
   }
 
   &__price {
@@ -27,9 +34,16 @@
   }
 
   &__counter {
-    width: 30%;
-
+    width: 75%;
+    margin: 1rem 1rem 1rem 1rem;
     @include flex(center, space-between, row);
+
+    @include tablet {
+      width: 65%;
+    }
+    @include desktop {
+      width: 40%;
+    }
   }
 
   &__bottom {
@@ -68,5 +82,14 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  &__textarea {
+    @include fontSizeAndColor(12px, $navy-blue);
+    @include outfit-light;
+
+    @include desktop {
+      @include fontSizeAndColor(16px, $navy-blue);
+    }
   }
 }

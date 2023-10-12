@@ -60,7 +60,7 @@ export const Cart = ({ handleCloseModal }) => {
                 return (
                   <ListGroup.Item key={item.product._id}>
                     <Row>
-                      <Col md={2}>
+                      <Col xs={3} md={2}>
                         <Link to={`/explore-scents/${item.product._id}`}>
                           <Image
                             src={item.product.image}
@@ -71,12 +71,12 @@ export const Cart = ({ handleCloseModal }) => {
                         </Link>
                       </Col>
 
-                      <Col md={5}>
+                      <Col xs={3} md={5}>
                         <Row className="cart__name">{item.product.name}</Row>
                         <Row className="cart__price">${item.product.price}</Row>
                       </Col>
 
-                      <Col md={5} className="d-flex align-items-center">
+                      <Col xs={6} md={5} className="d-flex align-items-center">
                         <Col className="scent__counter">
                           <Button
                             onClick={() => decrementQty(item)}
@@ -115,7 +115,7 @@ export const Cart = ({ handleCloseModal }) => {
         )}
 
         <Row className="mt-4 mb-4 mx-1">
-          <Col md={9} className="cart__total">
+          <Col xs={9} md={9} className="cart__total">
             Total
           </Col>
           <Col className="cart__totalPrice">
@@ -135,7 +135,7 @@ export const Cart = ({ handleCloseModal }) => {
             Checkout
           </Button>
         </Row>
-        <Row xs={12}>
+        <Row xs={1} xs={12}>
           <LinkContainer to="/explore-scents" onClick={handleCloseModal}>
             <div className="continue-shopping">
               <p className="continue-shopping--text">Continue Shopping</p>

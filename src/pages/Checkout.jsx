@@ -319,19 +319,19 @@ export const Checkout = () => {
                         </Link>
                       </Col>
 
-                      <Col sm={5} xs={4} md={4} lg={7}>
+                      <Col sm={5} xs={7} md={6} lg={7}>
                         <Row className="cart__name">{item.product.name}</Row>
                         <Row className="cart__price">${item.product.price}</Row>
                       </Col>
 
-                      <Col>x{item.qty}</Col>
+                      <Col xs={1}>x{item.qty}</Col>
                     </Row>
                   </ListGroup.Item>
                 );
               })}
 
             <Row className="mt-4">
-              <Col xs={9} md={9}>
+              <Col xs={9} md={8} lg={9}>
                 <p className="checkout__price">Price</p>
               </Col>
               <Col>
@@ -339,7 +339,7 @@ export const Checkout = () => {
               </Col>
             </Row>
             <Row>
-              <Col xs={9} md={9}>
+              <Col xs={9} md={8} lg={9}>
                 <p className="checkout__price">Shipping</p>
               </Col>
               <Col>
@@ -347,7 +347,7 @@ export const Checkout = () => {
               </Col>
             </Row>
             <Row>
-              <Col xs={9} md={9}>
+              <Col xs={9} md={8} lg={9}>
                 <p className="checkout__price">Tax</p>
               </Col>
               <Col>
@@ -355,7 +355,7 @@ export const Checkout = () => {
               </Col>
             </Row>
             <Row className="mt-3">
-              <Col xs={9} md={9}>
+              <Col xs={9} md={8} lg={9}>
                 <p className="checkout__price">Grand Total</p>
               </Col>
               <Col>

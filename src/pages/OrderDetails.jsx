@@ -205,7 +205,7 @@ export const OrderDetails = () => {
             </div>
           </ListGroup>
         </Col>
-        <Col md={3}>
+        <Col md={6} lg={4} xl={3}>
           <Card className="p-3">
             <ListGroup variant="flush">
               <ListGroup.Item>

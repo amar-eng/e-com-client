@@ -52,7 +52,7 @@ export const AppNavbar = () => {
     <div className="navbar-container">
       <Navbar className="custom-navbar">
         <Row className="navbar-row ">
-          <Col className="navbar-item" xs={4} sm={7} md={7} lg={8} xl={9}>
+          <Col className="navbar-item" xs={4} sm={7} md={7} lg={8} xl={10}>
             <LinkContainer to="/">
               <div className="navbar-logo">AERU</div>
             </LinkContainer>
@@ -66,7 +66,7 @@ export const AppNavbar = () => {
             className="navbar-item"
             onClick={openCartModal}
           >
-            {cartItems.length > 0 && (
+            {cartItems.length >= 0 && (
               <div className="navbar-item-container">
                 <p className="nav-number">
                   {cartItems.reduce((a, c) => a + c.qty, 0)}
@@ -74,7 +74,7 @@ export const AppNavbar = () => {
               </div>
             )}
           </Col>
-          <Col xs={7} sm={4} md={4} lg={3} xl={2} className="navbar-item">
+          <Col xs={7} sm={4} md={4} lg={3} xl={1} className="navbar-item">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               {!userInfo && (
                 <img

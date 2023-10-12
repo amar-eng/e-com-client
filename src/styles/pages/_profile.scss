@@ -1,13 +1,16 @@
 .profile-row {
   @include flex(center, center, row);
+  --bs-gutter-x: 0 !important;
   &__col {
     margin: 1rem 1.5rem;
     @include border-bottom;
     text-align: center;
+    --bs-gutter-x: 0 !important;
   }
 
   &__row {
     margin-bottom: 1rem;
+    --bs-gutter-x: 0 !important;
   }
 
   &-bottom {
@@ -23,14 +26,16 @@
     &__row {
       @include flex(center, center, row);
       margin-bottom: 1rem;
+      --bs-gutter-x: 0 !important;
     }
   }
 }
 
 .account-row {
   @include flex(flex-start, center, row);
+  --bs-gutter-x: 0 !important;
   &-col {
-    margin: 0.5rem 1.5rem;
+    margin: 0.5rem 2.5rem;
   }
 
   &__col {
@@ -40,5 +45,6 @@
   }
   &__items {
     margin: 0.5rem 0;
+    --bs-gutter-x: 0 !important;
   }
 }
