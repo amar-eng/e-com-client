@@ -54,7 +54,7 @@ export const AppNavbar = () => {
         <Row className="navbar-row ">
           <Col className="navbar-item" xs={3} sm={7} md={7} lg={8} xl={10}>
             <LinkContainer to="/">
-              <div className="navbar-logo">AERU</div>
+              <div className="navbar-logo">Al-Misk</div>
             </LinkContainer>
           </Col>
           <Col>
