@@ -15,11 +15,12 @@ Link {
 }
 
 .form-control {
-  border-radius: 0 !important;
+  border-radius: 7px !important;
   padding: 0.5rem 0.75rem !important;
+  @include fontSizeAndColor(15px, $black);
+  @include outfit-light;
 }
 .form-check {
-  margin: 0.75rem 0 !important;
   display: flex;
   align-items: center;
 }
@@ -31,7 +32,12 @@ Link {
   padding-left: 0.5rem !important;
 }
 
-.btn {
+.form-label {
+  @include fontSizeAndColor(17px, $black);
+  @include outfit-light;
+}
+
+.btn-prim {
   background-color: $navy-blue !important;
   color: $white !important;
   border-radius: 0 !important;

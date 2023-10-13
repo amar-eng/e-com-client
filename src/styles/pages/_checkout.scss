@@ -49,7 +49,6 @@
   &__input {
     background-color: $white;
     border-radius: 7px !important;
-    // border: 1px solid $navy-blue;
     @include fontSizeAndColor(15px, $black);
     @include outfit-light;
     cursor: pointer;

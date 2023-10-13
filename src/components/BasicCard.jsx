@@ -14,9 +14,7 @@ export const BasicCard = ({ name, occasion, rating, image, id }) => {
         </Row>
 
         <LinkContainer to={`/explore-scents/${id}`}>
-          <Button variant="primary" className="my-3">
-            Quick Shop
-          </Button>
+          <Button className=" btn-prim my-3">Quick Shop</Button>
         </LinkContainer>
       </Card.Body>
     </Card>
