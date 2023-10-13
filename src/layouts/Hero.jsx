@@ -5,7 +5,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 export const Hero = () => {
   return (
     <Row className="hero">
-      {/* Text and buttons exist here */}
       <Col xs={8} className="hero__content">
         <div className="hero__header">
           2 Designer Scents, 1 discovery Every Time!
@@ -28,7 +27,6 @@ export const Hero = () => {
         </Row>
       </Col>
 
-      {/* Col with a background image exists here */}
       <Col xs={4} className="hero__image"></Col>
     </Row>
   );

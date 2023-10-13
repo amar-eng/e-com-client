@@ -57,95 +57,93 @@ export const AppNavbar = () => {
               <div className="navbar-logo">AERU</div>
             </LinkContainer>
           </Col>
-          <Col
-            xs={1}
-            sm={1}
-            md={1}
-            lg={1}
-            xl={1}
-            className="navbar-item"
-            onClick={openCartModal}
-          >
-            {cartItems.length >= 0 && (
-              <div className="navbar-item-container">
-                <p className="nav-number">
-                  {cartItems.reduce((a, c) => a + c.qty, 0)}
-                </p>
-              </div>
-            )}
-          </Col>
-          <Col xs={7} sm={4} md={4} lg={3} xl={1} className="navbar-item">
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              {!userInfo && (
-                <img
-                  src={user}
-                  style={{
-                    width: '25px',
-                    cursor: 'pointer',
-                  }}
-                  onClick={openAuthModal}
-                />
-              )}
-
-              {userInfo && (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <NavDropdown
-                    title={`Hi, ${userInfo.name}`}
-                    id="username"
-                    className="nav-dropdown-name"
-                  >
-                    <LinkContainer to="/my-account">
-                      <NavDropdown.Item className="nav-dropdown-name__item">
-                        Profile
-                      </NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item
-                      onClick={logoutHandler}
-                      className="nav-dropdown-name__item"
+          <Col>
+            <Row className="align-items-center">
+              <Col className="navbar-item d-flex justify-content-end">
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {!userInfo && (
+                    <img
+                      src={user}
+                      style={{
+                        width: '25px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={openAuthModal}
+                      alt="scent scent-user perfume"
+                    />
+                  )}
+                  {userInfo && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
                     >
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                      <NavDropdown
+                        title={`Hi, ${userInfo.name}`}
+                        id="username"
+                        className="nav-dropdown-name"
+                      >
+                        <LinkContainer to="/my-account">
+                          <NavDropdown.Item className="nav-dropdown-name__item">
+                            Profile
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                        <NavDropdown.Item
+                          onClick={logoutHandler}
+                          className="nav-dropdown-name__item"
+                        >
+                          Logout
+                        </NavDropdown.Item>
 
-                  {userInfo.isAdmin && (
-                    <NavDropdown
-                      title="Admin"
-                      id="adminMenu"
-                      className="nav-dropdown-name nav-dropdown-admin"
-                    >
-                      <LinkContainer to="/admin/productlist">
-                        <NavDropdown.Item className="nav-dropdown-name__item">
-                          Products
-                        </NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/orderlist">
-                        <NavDropdown.Item className="nav-dropdown-name__item">
-                          Orders
-                        </NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/userlist">
-                        <NavDropdown.Item className="nav-dropdown-name__item">
-                          Users
-                        </NavDropdown.Item>
-                      </LinkContainer>
-                    </NavDropdown>
+                        {userInfo.isAdmin && (
+                          <>
+                            <NavDropdown.Divider />
+
+                            <LinkContainer to="/admin/productlist">
+                              <NavDropdown.Item className="nav-dropdown-name__item">
+                                Products
+                              </NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/admin/orderlist">
+                              <NavDropdown.Item className="nav-dropdown-name__item">
+                                Orders
+                              </NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/admin/userlist">
+                              <NavDropdown.Item className="nav-dropdown-name__item">
+                                Users
+                              </NavDropdown.Item>
+                            </LinkContainer>
+                          </>
+                        )}
+                      </NavDropdown>
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
 
-            <AuthModal
-              show={showAuthModal}
-              handleClose={closeAuthModal}
-              authType={authType}
-              setAuthType={setAuthType}
-            />
+                <AuthModal
+                  show={showAuthModal}
+                  handleClose={closeAuthModal}
+                  authType={authType}
+                  setAuthType={setAuthType}
+                />
+              </Col>
+              <Col
+                className="navbar-item d-flex justify-content-end"
+                onClick={openCartModal}
+                xl={3}
+              >
+                {cartItems.length >= 0 && (
+                  <div className="navbar-item-container">
+                    <p className="nav-number">
+                      {cartItems.reduce((a, c) => a + c.qty, 0)}
+                    </p>
+                  </div>
+                )}
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Navbar>

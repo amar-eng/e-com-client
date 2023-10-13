@@ -1,10 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Button } from 'react-bootstrap';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { Message } from '../components/Message';
 import { useDispatch } from 'react-redux';
 import { useCartItems } from '../hooks/useCartInfo';
-import { generateQuantitySelectOptions } from '../utils/common';
 import { addToCart, removeFromCart } from '../services/slices/cartSlice';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useUserInfo } from '../hooks/useUserInfo';
@@ -47,16 +45,14 @@ export const Cart = ({ handleCloseModal }) => {
     <Row>
       <Col md={12}>
         {cartItems.length === 0 ? (
-          <Message>
-            Your Cart is Empty <Link to="/explore-scents">Go Back</Link>
-          </Message>
+          <Col className="cardComp__concentration">
+            Your Cart is empty. Please Browse our collection and shop to
+            discover your most flattering fragrance
+          </Col>
         ) : (
           <ListGroup variant="flush">
             {cartItems.map((item) => {
               if (item && item.product) {
-                const quantitySelectOptions = generateQuantitySelectOptions(
-                  item.product.countInStock
-                );
                 return (
                   <ListGroup.Item key={item.product._id}>
                     <Row>
@@ -135,7 +131,7 @@ export const Cart = ({ handleCloseModal }) => {
             Checkout
           </Button>
         </Row>
-        <Row xs={1} xs={12}>
+        <Row xs={1}>
           <LinkContainer to="/explore-scents" onClick={handleCloseModal}>
             <div className="continue-shopping">
               <p className="continue-shopping--text">Continue Shopping</p>

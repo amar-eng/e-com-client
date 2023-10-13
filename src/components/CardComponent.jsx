@@ -44,7 +44,7 @@ export const CardComponent = ({
       <div className="cardComp__container">
         <Row className="cardComp__container-content align-items-center my-2">
           <Col className="cardComp__container-first" xs={3} lg={2}>
-            <Season season={season} width="20px" />
+            <Season season={season} width="25px" />
           </Col>
           <Col className="cardComp__container-first" xs={3} lg={3}>
             <Gender gender={gender} width="30px" />
@@ -55,7 +55,7 @@ export const CardComponent = ({
         </Row>
         <Rating value={rating} />
         <Col className="cardComp__container-first my-2">
-          Best Occasion: {occasion}
+          Type of Occasion: {occasion}
         </Col>
         <Col className="cardComp__brand my-2">{brand}</Col>
       </div>

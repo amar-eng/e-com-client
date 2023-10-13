@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Col, Form, Button } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { FormContainer } from '../components/FormContainer';
-import { CheckoutSteps } from '../layouts/CheckoutSteps';
 import { savePaymentMethod } from '../services/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +27,6 @@ export const Payment = () => {
 
   return (
     <FormContainer>
-      {/* <CheckoutSteps step1 step2 step3 /> */}
       <h3>Payment Method</h3>
       <Form onSubmit={submitHandler}>
         <Form.Group>

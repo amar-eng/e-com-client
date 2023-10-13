@@ -62,7 +62,9 @@ export const ExploreScents = () => {
                   as="select"
                   value={occasionFilter}
                   onChange={(e) => setOccasionFilter(e.target.value)}
-                  className="select-filter"
+                  className={`select-filter ${
+                    occasionFilter ? 'select-filter--active' : ''
+                  }`}
                 >
                   <option value=""> Filter Occasions </option>
                   <option value="Night-Out">Night Out</option>
@@ -78,7 +80,9 @@ export const ExploreScents = () => {
                   as="select"
                   value={concentrationFilter}
                   onChange={(e) => setConcentrationFilter(e.target.value)}
-                  className="select-filter"
+                  className={`select-filter ${
+                    concentrationFilter ? 'select-filter--active' : ''
+                  }`}
                 >
                   <option value="">Filter Vibe</option>
                   <option value="Eau de Parfum">Eau de Parfum</option>
@@ -92,7 +96,9 @@ export const ExploreScents = () => {
                   as="select"
                   value={seasonFilter}
                   onChange={(e) => setSeasonFilter(e.target.value)}
-                  className="select-filter"
+                  className={`select-filter ${
+                    seasonFilter ? 'select-filter--active' : ''
+                  }`}
                 >
                   <option value="">Filter Season</option>
                   <option value="spring">Spring</option>

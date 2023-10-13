@@ -140,9 +140,15 @@ export const ProductDetails = () => {
           </Col>
           <Col className="scent__price">${scent.price}</Col>
           <Col className="scent__quantity-left">
-            {scent.countInStock < 5 && (
+            {scent.countInStock < 5 && scent.countInStock > 0 && (
               <div>
                 Hurry, there's only <span>{scent.countInStock}</span> left!
+              </div>
+            )}
+            {scent.countInStock === 0 && (
+              <div>
+                Sorry we're fresh out! Sign up so you get updated the moment we
+                re-stock!
               </div>
             )}
           </Col>

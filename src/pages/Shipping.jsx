@@ -4,7 +4,6 @@ import { FormContainer } from '../components/FormContainer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveShippingAddress } from '../services/slices/cartSlice';
-import { CheckoutSteps } from '../layouts/CheckoutSteps';
 import { useCartItems, useShippingAddress } from '../hooks/useCartInfo';
 import { GoBack } from '../components/GoBack';
 import { Payment } from './Payment';

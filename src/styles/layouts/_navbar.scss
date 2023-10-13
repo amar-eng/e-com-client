@@ -61,17 +61,17 @@
 }
 
 .nav-dropdown-name {
-  @include fontSizeAndColor(13px, $gold);
+  @include fontSizeAndColor(13px, $green);
   @include tablet {
-    @include fontSizeAndColor(16px, $gold);
+    @include fontSizeAndColor(16px, $green);
   }
 
   @include outfit-light;
 
   &__item {
-    @include fontSizeAndColor(13px, $gold);
+    @include fontSizeAndColor(13px, $green);
     @include tablet {
-      @include fontSizeAndColor(16px, $gold);
+      @include fontSizeAndColor(16px, $green);
     }
     @include outfit-light;
   }

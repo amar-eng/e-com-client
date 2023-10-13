@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -14,7 +13,6 @@ import { toast } from 'react-toastify';
 
 export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const userInfo = useUserInfo();
   const [login] = useLoginMutation();
@@ -26,7 +24,7 @@ export const AuthModal = ({ show, handleClose, authType, setAuthType }) => {
     if (userInfo) {
       handleClose();
     }
-  }, [navigate, handleClose]);
+  }, [userInfo, handleClose]);
 
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
