@@ -52,16 +52,16 @@ export const AppNavbar = () => {
     <div className="navbar-container">
       <Navbar className="custom-navbar ">
         <Row className="navbar-row ">
-          <Col className="navbar-item" xs={4} sm={7} md={7} lg={8} xl={10}>
+          <Col className="navbar-item" xs={3} sm={7} md={7} lg={8} xl={10}>
             <LinkContainer to="/">
-              <div className="navbar-logo">Al-Misk</div>
+              <div className="navbar-logo">AERU</div>
             </LinkContainer>
           </Col>
           <Col>
             <Row className="align-items-center">
               <Col
                 className="navbar-item d-flex justify-content-end user"
-                xs={9}
+                xs={10}
                 xl={9}
               >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
