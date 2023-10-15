@@ -34,6 +34,7 @@ import { EditProduct } from './pages/Admin/EditProduct';
 import { UserLists } from './pages/Admin/UsersList';
 import { EditUser } from './pages/Admin/EditUser';
 import { Checkout } from './pages/Checkout';
+import ReactGA from 'react-ga4';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -85,6 +86,10 @@ const router = createBrowserRouter(
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const REACT_GA = 'G-WZ7RKTZXYE';
+
+ReactGA.initialize(REACT_GA);
 
 root.render(
   <React.StrictMode>

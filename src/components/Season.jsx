@@ -16,6 +16,7 @@ export const Season = ({ season, width }) => {
             : winter
         }
         style={{ width: `${width}` }}
+        alt="season for fragrence"
       />
     </Col>
   );

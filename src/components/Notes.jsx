@@ -11,7 +11,7 @@ export const Notes = ({ topNotes, middleNotes, baseNotes }) => {
           {topNotes.map((note, index) => {
             return (
               <div key={index} className="notes__group">
-                <img src={top} className="notes__icon" />
+                <img src={top} className="notes__icon" alt="top notes" />
                 <p className="notes__p">{note}</p>
               </div>
             );
@@ -24,7 +24,7 @@ export const Notes = ({ topNotes, middleNotes, baseNotes }) => {
           {middleNotes.map((note, index) => {
             return (
               <div key={index} className="notes__group">
-                <img src={heart} className="notes__icon" />
+                <img src={heart} className="notes__icon" alt="heart notes" />
                 <p className="notes__p">{note}</p>
               </div>
             );
@@ -37,7 +37,7 @@ export const Notes = ({ topNotes, middleNotes, baseNotes }) => {
           {baseNotes.map((note, index) => {
             return (
               <div key={index} className="notes__group">
-                <img src={base} className="notes__icon" />
+                <img src={base} className="notes__icon" alt="base notes" />
                 <p className="notes__p">{note}</p>
               </div>
             );
