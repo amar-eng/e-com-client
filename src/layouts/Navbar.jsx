@@ -61,7 +61,7 @@ export const AppNavbar = () => {
             <Row className="align-items-center">
               <Col
                 className="navbar-item d-flex justify-content-end user"
-                xs={10}
+                xs={9}
                 xl={9}
               >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -137,7 +137,7 @@ export const AppNavbar = () => {
               <Col
                 className="navbar-item d-flex justify-content-end shop"
                 onClick={openCartModal}
-                xs={2}
+                xs={3}
                 xl={3}
               >
                 {cartItems.length >= 0 && (
