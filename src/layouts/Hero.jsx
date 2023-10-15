@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export const Hero = () => {
   return (
     <Row className="hero">
-      <Col xs={8} className="hero__content">
+      <Col xs={7} sm={8} className="hero__content">
         <div className="hero__header">
           2 Designer Scents, 1 discovery Every Time!
           <p className="hero__header-paragraph">
@@ -13,7 +13,7 @@ export const Hero = () => {
             surprise.
           </p>
           <p className="hero__header-paragraph">
-            For the month of October <span>$24.99</span> $12.49.
+            For the month of October <span>25%</span> off.
           </p>
           <p className="hero__header-paragraph">Fragrance is forever</p>
         </div>
@@ -27,7 +27,7 @@ export const Hero = () => {
         </Row>
       </Col>
 
-      <Col xs={4} className="hero__image"></Col>
+      <Col xs={4} sm={4} className="hero__image"></Col>
     </Row>
   );
 };

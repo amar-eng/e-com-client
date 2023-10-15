@@ -1,6 +1,7 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 @import '../variables/colors';
 @import '../mixins/mixins';
+@import '../mixins/media-queries';
 
 Link {
   color: transparent;
@@ -158,5 +159,13 @@ Link {
 }
 
 .modal-dialog {
-  width: 400px !important;
+  // @include tablet {
+  //   width: 400px !important;
+  // }
+}
+
+@media (min-width: 767px) {
+  .modal-dialog {
+    width: 400px !important;
+  }
 }

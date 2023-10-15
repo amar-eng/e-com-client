@@ -78,7 +78,7 @@ export const Register = () => {
   return (
     <Row className="mx-5">
       <h1 className="login_header">Register</h1>
-      <Row className="mx-5">
+      <Row>
         <Col xl={6}>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group controlId="name" className="my-3 ">

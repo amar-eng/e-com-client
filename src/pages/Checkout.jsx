@@ -174,14 +174,14 @@ export const Checkout = () => {
       />
       <Form onSubmit={formik.handleSubmit}>
         <Row className="checkout">
-          <Col xs={11} md={7} className="checkout__col ">
+          <Col xs={11} md={11} lg={7} className="checkout__col ">
             <div>
               <h1>Checkout</h1>
 
               {/* Billing Details */}
               <h4 className="checkout__header">Billing Details</h4>
               <Row>
-                <Col>
+                <Col xs={12} md={6}>
                   <Form.Group controlId="billingName">
                     <Form.Label className="checkout__label">Name</Form.Label>
                     {renderInput('billingName', 'John Smith')}
@@ -227,7 +227,7 @@ export const Checkout = () => {
                 <Col>
                   <Form.Group controlId="shippingPostalCode">
                     <Form.Label className="checkout__label">
-                      Postal Code / Zip Code
+                      Postal / Zip Code
                     </Form.Label>
                     {renderInput(
                       'shippingPostalCode',
@@ -296,7 +296,7 @@ export const Checkout = () => {
               </Form.Group>
             </div>
           </Col>
-          <Col xs={11} md={4} className="checkout__col checkout__col-2">
+          <Col xs={11} md={7} lg={4} className="checkout__col checkout__col-2">
             <h4 className="checkout__header checkout__header--summary">
               Summary
             </h4>

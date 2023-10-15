@@ -2,9 +2,13 @@
   background-color: $white;
   color: $black;
   text-align: center;
-  height: 60vh;
+  height: 50vh;
   display: flex;
   align-items: stretch;
+
+  @include tablet {
+    height: 35vh;
+  }
 }
 
 .hero__content {
@@ -16,16 +20,21 @@
 
 .hero__header {
   @include antic;
-  @include fontSizeAndColor($large-heading, $black);
+  @include fontSizeAndColor(25px, $black);
   text-transform: capitalize;
   margin-bottom: 1rem;
   margin-left: 1rem;
+
+  @include tablet {
+    @include fontSizeAndColor($large-heading, $black);
+  }
 
   &-paragraph {
     @include fontSizeAndColor(14px, $black);
     text-transform: none;
     @include antic;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 
     @include tablet {
       @include fontSizeAndColor($small-heading, $black);
@@ -47,16 +56,16 @@
 }
 
 .hero__header-paragraph span {
-  position: relative;
+  color: $red;
 }
 
-.hero__header-paragraph span::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: red;
-  z-index: 1;
-}
+// .hero__header-paragraph span::before {
+//   content: '';
+//   position: absolute;
+//   top: 50%;
+//   left: 0;
+//   right: 0;
+//   height: 1px;
+//   background-color: red;
+//   z-index: 1;
+// }

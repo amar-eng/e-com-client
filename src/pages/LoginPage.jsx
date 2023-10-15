@@ -71,7 +71,7 @@ export const LoginPage = () => {
   return (
     <Row className="mx-5">
       <h1 className="login_header">Login</h1>
-      <Row className="mx-5">
+      <Row>
         <Col xl={6}>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group controlId="email" className="my-3 ">
