@@ -11,7 +11,7 @@
 
   &__header {
     @include outfit-light;
-    @include fontSizeAndColor(16px, $orange);
+    @include fontSizeAndColor(15px, $orange);
     margin-bottom: 1rem;
     text-transform: uppercase;
 

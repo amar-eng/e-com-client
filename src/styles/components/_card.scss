@@ -18,3 +18,16 @@
   cursor: pointer;
   z-index: 1;
 }
+
+.basic-card {
+  &__text {
+    @include fontSizeAndColor(16px, $orange);
+    @include outfit-light;
+  }
+
+  &__title {
+    @include outfit-Reg;
+    text-transform: uppercase;
+    @include fontSizeAndColor(20px, $navy-blue);
+  }
+}

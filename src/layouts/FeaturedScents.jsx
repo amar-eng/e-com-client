@@ -58,10 +58,12 @@ export const FeaturedScents = () => {
                 <Col md={5} lg={4} xl={3} key={product._id}>
                   <BasicCard
                     name={product.name}
-                    occasion={product.occasion}
+                    concentration={product.concentration}
                     rating={product.rating}
                     image={product.image}
                     id={product._id}
+                    gender={product.gender}
+                    season={product.season}
                   />
                 </Col>
               ))}

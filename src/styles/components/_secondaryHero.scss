@@ -17,7 +17,8 @@
 
   &__p {
     margin-bottom: 5rem;
-    @include thin-font;
-    @include fontSizeAndColor(20px, $off-white);
+    @include outfit-light;
+    @include fontSizeAndColor(22px, $off-white);
+    text-align: center;
   }
 }
