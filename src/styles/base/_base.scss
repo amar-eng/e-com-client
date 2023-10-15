@@ -1,6 +1,7 @@
 .app-container {
   * {
     box-sizing: border-box;
+    overflow-x: hidden !important;
   }
 
   a {
