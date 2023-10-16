@@ -76,6 +76,7 @@ export const FeaturedScents = () => {
                       id={product._id}
                       gender={product.gender}
                       season={product.season}
+                      price={product.price}
                     />
                   </Col>
                 ))}

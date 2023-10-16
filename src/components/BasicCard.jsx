@@ -13,6 +13,7 @@ export const BasicCard = ({
   id,
   gender,
   season,
+  price,
 }) => {
   const navigate = useNavigate();
 
@@ -30,7 +31,9 @@ export const BasicCard = ({
       />
       <Card.Body>
         <Card.Title className="basic-card__title">{name}</Card.Title>
-        <Card.Text className="basic-card__text">{concentration}</Card.Text>
+        <Card.Text className="basic-card__text">
+          {concentration} - ${price}
+        </Card.Text>
 
         <Row className="d-flex align-items-center justify-content-center mt-2">
           <Col xs={2}>
