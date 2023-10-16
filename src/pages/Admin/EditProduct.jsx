@@ -220,7 +220,7 @@ export const EditProduct = () => {
                 <Form.Group controlId="price">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="Number"
                     placeholder="Enter price"
                     value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
@@ -231,7 +231,7 @@ export const EditProduct = () => {
                 <Form.Group controlId="longevity">
                   <Form.Label>longevity</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="Number"
                     placeholder="Enter longevity 1-5"
                     value={longevity}
                     onChange={(e) => setLongevity(Number(e.target.value))}
@@ -291,7 +291,7 @@ export const EditProduct = () => {
                 <Form.Group controlId="rating">
                   <Form.Label>Rating</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="Number"
                     placeholder="Enter rating"
                     value={rating}
                     onChange={(e) => setRating(Number(e.target.value))}
@@ -437,7 +437,7 @@ export const EditProduct = () => {
                           newNotes[index] = e.target.value;
                           setTopNotes(newNotes);
                         }}
-                        className="mr-2" // Add some margin to the right of the input
+                        className="mr-2"
                       />
                       <Button
                         type="button"
