@@ -5,13 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useCartItems } from '../hooks/useCartInfo';
 import { addToCart, removeFromCart } from '../services/slices/cartSlice';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useUserInfo } from '../hooks/useUserInfo';
 
 export const Cart = ({ handleCloseModal }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useCartItems();
-  const userInfo = useUserInfo();
 
   const addToCartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));
