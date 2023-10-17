@@ -22,11 +22,7 @@ export const Cart = ({ handleCloseModal }) => {
   };
 
   const checkoutHandler = () => {
-    if (userInfo) {
-      navigate('/checkout');
-    } else {
-      navigate('/login?redirect=/checkout');
-    }
+    navigate('/checkout');
   };
 
   const decrementQty = (item) => {

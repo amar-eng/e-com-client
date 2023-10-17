@@ -65,7 +65,7 @@ export const AppNavbar = () => {
                 xl={9}
               >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {!userInfo && (
+                  {!userInfo.name && (
                     <img
                       src={user}
                       style={{
@@ -76,7 +76,7 @@ export const AppNavbar = () => {
                       alt="scent scent-user perfume"
                     />
                   )}
-                  {userInfo && (
+                  {userInfo.name && (
                     <div
                       style={{
                         display: 'flex',
