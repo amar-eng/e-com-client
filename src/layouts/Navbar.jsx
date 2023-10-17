@@ -38,6 +38,7 @@ export const AppNavbar = () => {
   const dispatch = useDispatch();
 
   const [logoutApiCall] = useLogoutMutation();
+
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
@@ -65,7 +66,7 @@ export const AppNavbar = () => {
                 xl={9}
               >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {!userInfo.name && (
+                  {!userInfo && (
                     <img
                       src={user}
                       style={{
@@ -76,7 +77,7 @@ export const AppNavbar = () => {
                       alt="scent scent-user perfume"
                     />
                   )}
-                  {userInfo.name && (
+                  {userInfo && (
                     <div
                       style={{
                         display: 'flex',
