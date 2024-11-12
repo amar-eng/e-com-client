@@ -16,7 +16,7 @@ Welcome to the GitHub repository for **Aeru**, a specialized e-commerce platform
 
 - **React**: Powers the dynamic interfaces of our e-commerce site.
 - **Redux**: Manages state across the application for a consistent and efficient user experience.
-- **Bootstrap**: Ensures the website is attractive and accessible on all devices.
+- **Tailwind**: Ensures the website is attractive and accessible on all devices.
 - **Axios**: Facilitates API calls to our back-end services, handling user data and product information securely.
 
 ## Getting Started
